@@ -126,20 +126,26 @@ router.get('/requisition/:id', (req, res) => {
     });
 });
 
-router.get('/requisition/new', (req, res) => {
-    res.render('encoder/ecreatereq', {
-        active: {
-            encoder: true,
-            erequisition: true
-        },
-        pageHeader: "Requisition Form",
-        helpers: {
-      json: function (a) {
-        var stringified = JSON.stringify(a);
-        return stringified.replace(/&quot;/g, '\\"');
-      }
-  }
-    });
+router.get('/create/requisition', (req, res) => {
+    models.Project.findAll().then((projects)=>{
+        models.Material.findAll().then((materials)=>{
+            res.render('encoder/ecreatereq3', {
+                active: {
+                    encoder: true,
+                    erequisition: true
+                },
+                projects:projects,
+                materials:materials,
+                pageHeader: "Requisition Form",
+                helpers: {
+                    json: function (a) {
+                        var stringified = JSON.stringify(a);
+                        return stringified.replace(/&quot;/g, '\\"');
+                    }
+                }
+            });
+        })
+    })
 });
 
 router.get('/requisition/new/2', (req, res) => {
@@ -202,7 +208,9 @@ router.post('/posteReq1', function (req, res) {
     });
 });
 
-router.post('/posteReq2', function (req, res) {
+router.post('/req/new', function (req, res) {
+    req.body.materials = JSON.stringify(req.body.materials)
+    req.body.UserId = req.user.dataValues.id
     models.RequisitionForm.create(req.body).then(() => {
         res.redirect('/encoder/requisition');
     });

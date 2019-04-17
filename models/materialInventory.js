@@ -7,19 +7,16 @@ module.exports = (sequelize, type) => {
     quantityBought: {
       type: Sequelize.FLOAT,
       allowNull: false,
+      default: 0
     },
     quantityUsed: {
       type: Sequelize.FLOAT,
-      allowNull: false,
+      allowNull: true,
       default: 0
     },
     price: {
       type: Sequelize.FLOAT,
       allowNull: false,
-    },
-    purchaseDate: {
-      type: Sequelize.DATE,
-      allowNull: false,
-    },
+    }
   });
 };

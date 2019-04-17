@@ -1,0 +1,105 @@
+<div class="createtemplaterow">
+  <h2>Create Requisition Order</h2>
+  <br />
+  <label for="templatename">PO DESCRIPTION</label>
+  <input type="text" id="description" name="description">
+  
+  <label for="templatename">SUPPLIER</label>
+  <input type="text" id="supplier" name="description">
+
+  <label for="templatename">DATE ORDERED</label>
+  <input type="date" id="dateOrdered" name="description">
+
+  <select class="unit" id="project" name="material" required>
+    {{#each projects}}
+    <option value={{this.id}}>{{this.projectName}}</option>
+    {{/each}}
+  </select>
+
+  <br>
+  <button type="submit" class="btn btn-tileworks btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    Add Material
+  </button>
+  <button onclick="send()" class="btn btn-tileworks btn-primary" id="saveTemplate">Send PO</button>
+
+  <table>
+    <thead>
+      <th>Material</th>
+      <th>Quantity</th>
+    </thead>
+    <tbody id="templateMaterials">
+
+    </tbody>
+  </table>
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="MyModal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">New Material</h5>
+      </div>
+      <div class="modal-body">
+        <!-- post modal employee-->
+        <div class="settings">
+          <label for="material" class="col-form-label">Material</label>
+          <select class="unit" id="material" name="material" required>
+            {{#each materials}}
+            <option value={{this.materialName}}>{{this.materialName}}</option>
+            {{/each}}
+          </select>
+          <label for="quantity" class="col-form-label">Quantity</label>
+          <input type="quantity" id="quantity" name="quantity" required>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-transparent" data-dismiss="modal">Cancel</button>
+          <button onclick="add()" id="saveMaterial" class="btn btn-save">Save</button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    var poMaterials = []
+
+    function send() {
+      var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+      xmlhttp.open("POST", "/encoder/req/new");
+      xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xmlhttp.send(JSON.stringify({
+          description: document.getElementById('description').value,
+          supplier: document.getElementById('supplier').value,
+          dateOrdered: document.getElementById('dateOrdered').value,
+          projectId: document.getElementById('project').value,
+          materials: poMaterials
+        }));
+      window.location.replace('/encoder/po')
+    }
+
+    function add() {
+      var a = document.getElementById('material').value;
+      var b = document.getElementById('quantity').value;
+      if (a != '' && b != '') {
+        var tr_node = document.createElement("tr")
+
+        var material_node = document.createElement('td')
+        material_node.innerHTML = a
+        var quantity_node = document.createElement('td')
+        quantity_node.innerHTML = b
+        tr_node.appendChild(material_node)
+        tr_node.appendChild(quantity_node)
+
+        poMaterials.push({ 
+          material: a, 
+          quantity: b, 
+        });
+
+        document.getElementById('templateMaterials').appendChild(tr_node)
+      }
+      console.log(a)
+      console.log(b)
+    }
+  </script>

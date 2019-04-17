@@ -19,7 +19,6 @@ const exphbs = require('express-handlebars');
 const bcrypt = require("bcrypt-nodejs");
 const Op = Sequelize.Op;
 
-
 router.get('/dashboard', (req, res) => {
     models.User.findAll().then((users) => {
         res.render('management/mdashboard', {
@@ -509,10 +508,14 @@ router.get('/po/approve/:id', (req, res) => {
         let materials = JSON.parse(purchase_order.materials)
         for(let material of materials){
             models.Material.findOne({where:{materialName: material.material}}).then((_material)=>{
+                models.Inventory.create({
+                    materialId: _material.id,
+                    quantityBought: material.quantity,
+                    price: material.unit_price
+                })
                 if(_material.priceHistory!=null){
                     console.log(_material.priceHistory)
                     history=JSON.parse(_material.priceHistory);
-                    
                     history.push(material.unit_price)
                     _material.update({priceHistory:JSON.stringify(history)})
                 }else{
@@ -540,7 +543,7 @@ router.get('/po/delete/:id', (req, res) => {
 });
 
 router.post('/postMaterialForm', function (req, res) {
-    models.Material.create(req.body).then(() => {
+    models.Material.create(req.body).then((material) => {
         res.redirect('/management/materials');
     })
 });

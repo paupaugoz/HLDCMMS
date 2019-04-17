@@ -8,7 +8,7 @@ module.exports = (sequelize, type) => {
     },
     status: {
       type: Sequelize.STRING,
-      allowNull: false,
+      default: "Pending"
     },
     description: {
       type: Sequelize.STRING,
@@ -16,7 +16,7 @@ module.exports = (sequelize, type) => {
     },
     comments: {
       type: Sequelize.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     materials: {
       type: Sequelize.STRING,
@@ -24,6 +24,10 @@ module.exports = (sequelize, type) => {
     },
     supplier: {
       type: Sequelize.STRING,
+      allowNull: true,
+    },
+    projectId: {
+      type: Sequelize.INTEGER,
       allowNull: true,
     },
   });
