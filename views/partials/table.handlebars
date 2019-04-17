@@ -22,7 +22,7 @@
 
   {{#if ../../active.epo}}
           <a>
-          <option value="delete" onclick="changeSelect('encoder/deleteEpo', this.value, {{lookup row 'id'}})">
+          <option value="delete" onclick="changeSelect('encoder/deleteEpo', this.value, {{lookup row 'ID'}})">
             Delete</option>
          </a>
 
@@ -306,11 +306,13 @@
                 {{/if}}
 
                 {{#if ../../active.engpo}}
-                <a href="/engineer/engviewpo/{{lookup row 'id'}}">Edit PO</option></a>
+                <a href="/engineer/po/{{lookup row 'id'}}">Edit PO</option></a>
                   <a>
                     <option value="delete" onclick="changeSelect('engineer/deletePo', this.value, {{lookup row 'id'}})">
                       Delete</option>
                   </a>
+                <a href="/engineer/bom/new/{{lookup row 'id'}}">Create BOM</option></a>
+              
                   {{/if}}
 
                   {{#if ../../active.engprojects}}
