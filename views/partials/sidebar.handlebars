@@ -40,6 +40,9 @@
 
 
 {{#if active.encoder}}
+<li class="{{#if active.dashboard}}active{{/if}}">
+		<a href="/encoder/dashboard">Dashboard<span class="sr-only">(current)</span>
+		</a>
 	<li class="{{#if active.epo}}active{{/if}}">
 		<a href="/encoder/po">Purchases</a>
 	</li>
@@ -53,6 +56,9 @@
 
 
 {{#if active.warehouse}}
+<li class="{{#if active.dashboard}}active{{/if}}">
+		<a href="/warehouse/dashboard">Dashboard<span class="sr-only">(current)</span>
+		</a>
 	<li class="{{#if active.winventory}}active{{/if}}">
 		<a href="/warehouse/inventory">Inventory</a>
 	</li>
@@ -66,6 +72,9 @@
 
 
 {{#if active.engineer}}
+<li class="{{#if active.dashboard}}active{{/if}}">
+		<a href="/engineer/dashboard">Dashboard<span class="sr-only">(current)</span>
+		</a>
 	<li class="{{#if active.engpo}}active{{/if}}">
 		<a href="/engineer/po">Purchases</a>
 	</li>

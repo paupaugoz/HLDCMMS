@@ -16,7 +16,8 @@ const Sequelize = require('sequelize');
 router.get('/dashboard', (req, res) => {
     res.render('encoder/edashboard', {
         active: {
-            encoder: true
+            encoder: true,
+            dashboard: true
         },
         pageHeader: "Welcome!"
     });
@@ -55,7 +56,7 @@ router.get('/po/new',(req,res)=>{
             res.render('encoder/ecreatepo2',{
                 active: {
                     encoder: true,
-                    epo: true
+                    eponew: true
                 },
                 pageHeader: "Create a New Purchase Order",
                 projects: projects,
@@ -184,6 +185,9 @@ router.post('/deleteERequisition', function (req, res) {
     console.log(req.body);
 });
 
+
+
+
 router.post('/postPurchaseOrderTable', function (req, res) {
     console.log(req.user.dataValues.username)
     req.body.orderedBy = req.user.dataValues.username
@@ -201,6 +205,10 @@ router.post('/posteMaterialForm', function (req, res) {
     Promise.all(promises).then(() => {
         res.redirect('/encoder/materials');
     })
+});
+
+router.post('/deleteTest', function (req, res) {
+    console.log(req.body);
 });
 
 router.post('/posteReq1', function (req, res) {

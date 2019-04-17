@@ -19,6 +19,15 @@
 
         {{#if col.editable}}
 
+
+  {{#if ../../active.epo}}
+          <a>
+          <option value="delete" onclick="changeSelect('encoder/deleteEpo', this.value, {{lookup row 'id'}})">
+            Delete</option>
+         </a>
+
+  {{/if}}
+
         {{#if ../../active.employees}}
         <a value="edit" data-toggle="modal" data-target="#employeeModal">Edit</option></a>
         <a>
@@ -42,8 +51,6 @@
                     <input type="text" id="first-name" name="first-name" required>
                     <label for="last-name" class="col-form-label">Last Name</label>
                     <input type="text" id="last-name" name="last-name" required>
-                    <label for="user-name" class="col-form-label">User Name</label>
-                    <input type="text" id="user-name" name="user-name" required>
                     <label for="password" class="col-form-label">Password</label>
                     <input type="text" id="password" name="password" required>
                     <label for="position" class="col-form-label">Position</label>
@@ -285,8 +292,8 @@
           {{/if}}
 
           {{#if ../../active.wpo}}
-          <a href="/warehouse/wviewpo/{{lookup row 'id'}}">View</option>
-            <a href="/warehouse/wpendingpo/{{lookup row 'id'}}">View Pending</option>
+          <a href="/warehouse/po/{{lookup row 'id'}}">View</option>
+            <a href="/warehouse/po/pending/{{lookup row 'id'}}">View Pending</option>
               {{/if}}
 
               {{#if ../../active.wrequisition}}
@@ -299,7 +306,7 @@
                 {{/if}}
 
                 {{#if ../../active.engpo}}
-                <a href="/engineer/engviewpo/{{lookup row 'id'}}">Edit PO</option>
+                <a href="/engineer/engviewpo/{{lookup row 'id'}}">Edit PO</option></a>
                   <a>
                     <option value="delete" onclick="changeSelect('engineer/deletePo', this.value, {{lookup row 'id'}})">
                       Delete</option>
@@ -307,10 +314,12 @@
                   {{/if}}
 
                   {{#if ../../active.engprojects}}
-                  <a href="/engineer/engviewprojects/{{lookup row 'id'}}">View</option>
-                    <a href="/engineer/engcreatebom/{{lookup row 'id'}}">Create BOM</option>
+                  <a href="/engineer/projects/{{lookup row 'id'}}">View</option></a>
+                    <a href="/engineer/bom/new/{{lookup row 'id'}}">Create BOM</option></a>
                       {{/if}}
 
+
+                 
                       {{else}}
                       {{lookup row col.name}}
                       {{/if}}

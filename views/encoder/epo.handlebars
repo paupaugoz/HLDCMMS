@@ -14,7 +14,22 @@
         <div class="row">
            <div class="row filter materialsrow textright">
           <a href="/encoder/po/new" class="btn btn-left btn-req  btn-primary">Add PO</a>
-          <button type="submit" class="btn btn-req btn-decline btn-unit btn-primary" >Delete</button>
+         
+</div>
+  </div> 
+
+
+   		  
+          <div class="fixed">
+          <form action="/encoder/postPurchaseOrderTable" method="POST" id="potable-form">
+           {{> table tableColumns=columns tableData=data active=active}}
+           </div>
+
+           <div class="row">
+            <h2 class="total">Total: (This is sum of Unit Cost from DB)Php 9999.99</h2>
+          </div>
+         
+
            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="MyModal" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
 
@@ -66,17 +81,3 @@
      </div>
    </div>
  </div>
-</div>
-  </div> 
-
-
-   		  
-          <div class="fixed">
-          <form action="/encoder/postPurchaseOrderTable" method="POST" id="potable-form">
-           {{> table tableColumns=columns tableData=data active=active}}
-           </div>
-
-           <div class="row">
-            <h2 class="total">Total: (This is sum of Unit Cost from DB)Php 9999.99</h2>
-          </div>
-         
