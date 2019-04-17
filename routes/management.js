@@ -257,12 +257,56 @@ router.get('/viewprojects/:id', (req, res) => {
 
 router.get('/po/report', (req, res) => {
     console.log(req.query);
-    let _where = {projectId: parseInt(req.query.projectId)};
-    req.query.startDate == ''? delete req.query.startDate : _where.createdAt={[Op.gt]: req.query.startDate}
-    req.query.endDate == ''? delete req.query.endDate : _where.createdAt={[Op.lt]: req.query.endDate}
-    console.log(_where)
-    models.PurchaseOrder.findAll({where:_where}).then((purchase)=>{
-        console.log(purchase)
+    req.query.startDate == "" ? req.query.startDate = "1970-01-01 00:00:01" : true;
+    req.query.endDate == "" ? req.query.endDate = "9999-12-31 23:59:59" : true;
+    let _where = {projectId: parseInt(req.query.projectId),
+    createdAt:{
+        [Op.between]:[req.query.startDate,req.query.endDate]
+    }};
+    models.PurchaseOrder.findAll({where:_where, raw: true, logging: console.log}).then((purchases)=>{
+        let dict = {}
+        for(let purchase of purchases){
+            console.log(purchase)
+            materials = JSON.parse(purchase.materials)
+            for(let material of materials){
+                if(material.material in dict){
+                    dict[material.material] = {
+                        unit_price:  (dict[material.material].unit_price * dict[material.material].quantity + parseFloat(material.unit_price) * parseFloat(material.quantity))/(parseFloat(material.quantity)+dict[material.material].quantity), 
+                        total_price: dict[material.material].total_price + parseFloat(material.total_price), 
+                        quantity: dict[material.material].quantity + parseFloat(material.quantity),
+                    }
+                }
+                else{
+                    dict[material.material] = {
+                        unit_price: parseFloat(material.unit_price), 
+                        total_price: parseFloat(material.total_price), 
+                        quantity: parseFloat(material.quantity),
+                    }
+                }
+            }
+        }
+        report_data = []
+        for(let key in dict){
+            let data = dict[key]
+            data.material = key
+            report_data.push(data)
+        }
+        console.log(report_data)
+        res.render('management/generatePurchaseReport', {
+            active: {
+                management: true,
+                reports: true
+            },
+            data: report_data,
+            columns: purchaseReportColumn,
+            pageHeader: "Reports",
+            helpers: {
+                json: function (a) {
+                    var stringified = JSON.stringify(a);
+                    return stringified.replace(/&quot;/g, '\\"');
+                }
+            }
+        });
     });
 })
 
@@ -289,7 +333,7 @@ router.get('/createbom/:id', (req, res) => {
 });
 
 router.get('/po', (req, res) => {
-    models.PurchaseOrder.findAll().then((poData) => {
+    models.PurchaseOrder.findAll({where:{status:'Pending'}}).then((poData) => {
         let approved = 0;
         let pending = 0;
         for (let data in poData) {
@@ -461,6 +505,23 @@ router.get('/materials/new', (req, res) => {
 });
 
 router.get('/po/approve/:id', (req, res) => {
+    models.PurchaseOrder.findByPk(req.params.id).then((purchase_order)=>{
+        let materials = JSON.parse(purchase_order.materials)
+        for(let material of materials){
+            models.Material.findOne({where:{materialName: material.material}}).then((_material)=>{
+                if(_material.priceHistory!=null){
+                    console.log(_material.priceHistory)
+                    history=JSON.parse(_material.priceHistory);
+                    
+                    history.push(material.unit_price)
+                    _material.update({priceHistory:JSON.stringify(history)})
+                }else{
+                    _material.update({priceHistory:JSON.stringify([material.unit_price])})
+                }
+            })
+        }
+    })
+
     models.PurchaseOrder.update({status: 'Approved'},{where:{id:req.params.id}}).then(()=>{
         res.redirect('/management/po');
     });
