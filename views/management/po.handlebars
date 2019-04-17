@@ -1,0 +1,36 @@
+
+{{active.viewPO}} {{active.po}}
+<h1 class="page-header">{{pageHeader}}</h1>
+
+<div class="row">
+  <h2 class="poapproved">Approved({{approvedCount}})</h2>
+  <h2 class="popending">Pending({{pendingCount}})</h2>
+
+  <div class="row filter materialsrow textright">
+    <p>Quarter:</p>
+    <select class="materialsbutton">
+      <option>First Quarter</option>
+      <option>Second Quarter</option>
+    </select>
+    <p>Year:</p>
+    <select class="materialsbutton" id="selectElementId"></select>
+    <div class="dropdown">
+      <button onclick="#" class="dropbtn">Filter</button>
+      <!-- Filter-- based on quarter and year-->
+
+    </div>
+
+  </div>
+
+  <div class="fixed left">
+    {{> table tableColumns=columns tableData=data active=active}}
+  </div>
+
+</div>
+
+
+<!-- Filter-->
+
+</div>
+
+

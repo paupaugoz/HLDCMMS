@@ -1,0 +1,32 @@
+
+
+<div class="row">
+<a class="return" href="/encoder/materials">Return to Materials</a>
+         <div class="row">
+         <h1 class="projheader">Create Material</h1>
+   </div>
+        <form action="/encoder/posteMaterialForm" target="_self" method="POST" id="creatematerials-form">
+     <div class="creatematerialrow">
+     <input type="hidden"  value="1" />
+        <div class="control-group" id="fields">
+            <label class="control-label" for="field1">Material Name:</label>
+            <div class="controls" id="profs"> 
+                
+            <div><input  name="materialName" autocomplete="off" class="input width" id="field1" name="prof1" type="text" required data-items="8"/><button id="b1" class="btn add-more" type="button">+</button></div>
+                
+            </div>
+        </div>
+</div>
+
+
+<div class="modal-footer projectfooter">
+  <a href="/encoder/materials"><button type="button" class="btn btn-transparent">Cancel</button></a>
+  <button type="submit" class="btn btn-save">Create Material</button>
+</div>
+</div>
+</form>
+
+
+
+
+

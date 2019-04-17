@@ -1,0 +1,25 @@
+ <a href="/encoder/requisition">Return to Requisitions List</a>
+ <div class="row">
+          <h1 class="viewheader">Project {{item.id}}</h1>
+         </div>
+
+          <div class="row">
+
+        </div>
+         <div class="rowbody">
+          <div class="row">
+
+          <!-- get from db-->
+            <p class="viewproject"><strong>Delivery Location</strong>: Fujjan Corporation</p>
+            <p class="viewproject2"><strong>Requisition Date</strong>: 02/24/2019</p>
+          </div>
+           <div class="row">
+           <p class="viewproject"><strong>Unit</strong>: 2-Story Commercial Bldg</p>
+          </div>
+          <div class="row">
+           <p class="viewproject"><strong>Phase</strong>: First Quarter</p>
+          </div>
+
+            <div class="fixed">
+            {{> table tableColumns=columns tableData=data}}
+            </div>

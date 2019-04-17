@@ -1,0 +1,78 @@
+{{#if active.management}}
+<li class="{{#if active.dashboard}}active{{/if}}">
+		<a href="/management/dashboard">Dashboard<span class="sr-only">(current)</span>
+		</a>
+
+	<li class="{{#if active.employees}}active{{/if}}">
+		<a href="/management/employees">Employees <span class="sr-only">(current)</span>
+		</a>
+	</li>
+	<li class="{{#if active.highlight}}active-highlight{{/if}}"><a href="/management/po">Purchases</a></li>
+	{{#if active.viewAPO}}
+		<li class="active"><a href="/management/po">View PO</a></li>
+		<li class="active-highlight"><a href="/management/po">Pending PO</a></li>
+	{{/if}}
+	{{#if active.pendingPO}}
+		<li class="active-highlight"><a href="/management/po">View PO</a></li>
+		<li class="active"><a href="/management/po">Pending PO</a></li>
+	{{/if}}
+
+	<li class="{{#if active.projects}}active{{/if}} {{#if active.viewprojects}}active{{/if}}">
+		<a href="/management/projects">Projects</a>
+	</li>
+
+	
+
+	<li class="{{#if active.templates}}active{{#if active.createtemplate}}-highlight{{/if}}{{/if}}">
+		<a href="/management/templates">Templates</a>
+	</li>
+
+	{{#if active.createtemplate}}
+		<li class="active"><a href="#">Create Template</a></li>
+	{{/if}}
+	<li class="{{#if active.materials}}active{{/if}}">
+		<a href="/management/materials">Materials</a>
+	</li>
+	<li class="{{#if active.reports}}active{{/if}}">
+		<a href="/management/project_reports">Reports</a>
+	</li>
+{{/if}}
+
+
+{{#if active.encoder}}
+	<li class="{{#if active.epo}}active{{/if}}">
+		<a href="/encoder/po">Purchases</a>
+	</li>
+	<li class="{{#if active.ematerials}}active{{/if}}">
+		<a href="/encoder/materials">Materials</a>
+	</li>
+	<li class="{{#if active.erequisition}}active{{/if}}">
+		<a href="/encoder/requisition">Requisition</a>
+	</li>
+{{/if}}
+
+
+{{#if active.warehouse}}
+	<li class="{{#if active.winventory}}active{{/if}}">
+		<a href="/warehouse/inventory">Inventory</a>
+	</li>
+	<li class="{{#if active.wpo}}active{{/if}}">
+		<a href="/warehouse/po">Purchases</a>
+	</li>
+	<li class="{{#if active.wrequisition}}active{{/if}}">
+		<a href="/warehouse/requisition">Requisition</a>
+	</li>
+{{/if}}
+
+
+{{#if active.engineer}}
+	<li class="{{#if active.engpo}}active{{/if}}">
+		<a href="/engineer/po">Purchases</a>
+	</li>
+	<li class="{{#if active.engprojects}}active{{/if}}">
+		<a href="/engineer/projects">Projects</a>
+	</li>
+	<li class="{{#if active.engrequisition}}active{{/if}}">
+		<a href="/engineer/requisition">Requisition</a>
+	</li>
+{{/if}}

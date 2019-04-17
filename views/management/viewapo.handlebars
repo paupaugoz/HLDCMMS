@@ -1,0 +1,30 @@
+<a class="font" href="/management/po">Return to Purchase Orders</a>
+
+<a class="option" href="/management/projects">Print</a>
+<a onclick="exportTableToCSV('members.csv')" class="option" href="/management/projects">Export</a>
+
+<div class="row">
+  <h1 class="viewheader">{{pageHeader}} {{item1.position}} {{item.id}}</h1>
+</div>
+
+<div class="rowbody">
+  <div class="row">
+    <p class="viewproject"><strong>Status</strong>: <span class="delivered">{{item.status}}</span></p>
+  </div>
+  <div class="row">
+    <p class="viewproject"><strong>Supplier</strong>: {{item.supplier}}</p>
+  </div>
+  <div class="row">
+    <p class="viewproject"><strong>Date Created</strong>: {{item.dateCreated}}</p>
+  </div>
+  <div class="row">
+    <p class="viewproject"><strong>Requested By</strong>: {{item.orderedBy}}</p>
+  </div>
+
+  <div class="fixed ">
+    {{> table tableColumns=columns tableData=data}}
+  </div>
+   <div class="row">
+            <h2 class="total">Total: Php 9999.99</h2>
+          </div>
+</div>

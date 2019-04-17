@@ -1,0 +1,85 @@
+<div class="createtemplaterow">
+
+  <div class="sidebarmaterial">
+
+    <div class="sectionheader">
+      <div class="sidebar-padding">
+<form action="/management/postCreateTemplateForm" method="POST" id="createtemplate-form">
+        <label for="templatename">TEMPLATE NAME</label>
+
+        <input type="text" name="templatename">
+      </div>
+    </div>
+
+    <div class="sectionbody">
+      <div class="sidebar-padding">
+        <p>CATEGORY</p>
+
+      </div>
+      <select class="dd headercol1" id="engineer-in-charge" class="projdropdown">
+        <option disabled selected value></option>
+        <option>Fill category</option>
+      </select>
+    </div>
+    <div class="sectionfooter">
+      <div class="sidebar-padding">
+        <button onclick="exportTableToCSV('members.csv')" class="sidebarfooter" type="button"
+          class="btn btn-save">Export</button>
+        <button class="sidebarfooter" type="button" class="btn btn-save">Print</button>
+        <button class="sidebarfooter" type="button" class="btn btn-save">Save</button>
+        <a href="/management/templates"><button class="sidebarfooter" type="button"
+            class="btn btn-save">Cancel</button></a>
+
+      </div>
+    </div>
+
+  </div>
+  <a class="tileworksreturn" href="/management/templates">Return to Templates</a>
+  <div class="row tileworks">
+    <h1 class="page-header">Tileworks</h1>
+  </div>
+
+  <div class="row">
+    <button type="button" class="btn btn-decline btn-tileworks btn-primary">Delete</button>
+    <button type="submit" class="btn btn-tileworks btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Add Material</button>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="MyModal" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">New Material</h5>
+
+          </div>
+          <div class="modal-body">
+
+        <!-- post modal employee-->
+      <form action="/management/employee/new"  method="POST" id="newemployee-form">
+       <form action="editTemplate"  method="POST" id="editTemplate-form">
+        <div class="settings">
+          <label for="material" class="col-form-label">Material</label>
+          <select class="unit" id="material" name="material" required>
+          <option disabled selected value></option>
+          <option>Load from materials</option>
+          </select>
+          <label for="quantity" class="col-form-label">Quantity</label>
+          <input type="quantity" id="first-name" name="quantity" required>
+          <label for="unit" class="col-form-label">Unit</label>
+          <input type="text" id="unit" name="unit" required>  
+        </div>
+ <div class="modal-footer">
+        <button type="button" class="btn btn-transparent" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-save">Save</button>
+       </form>
+      </div>
+     
+      </div>
+     
+    </div>
+  </div>
+  </div>
+
+
+  <div class="fixed">
+    {{> table tableColumns=columns tableData=data}}
+  </div>
+  </form>
+</div>

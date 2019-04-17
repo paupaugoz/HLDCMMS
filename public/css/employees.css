@@ -1,0 +1,706 @@
+.modal {
+  text-align: center;
+}
+.test {
+  position:relative;
+  left: 5%;
+}
+@media screen and (min-width: 768px) { 
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+.left {
+  margin-left: 1%;
+}
+
+.datedate {
+  display:inline-block;
+  margin-left: 4px;
+}
+
+
+
+
+.btn-float {
+  position: relative;
+  float: right;
+  right: 2%;
+  width: 7%;
+}
+
+.btn-left {
+  position: relative;
+  right: 1.5%;
+
+}
+
+.width {
+  width: 50%;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+div.creatematerialrow {
+  height: 500px;
+  width: 400px;
+  position: relative;
+  overflow-y: scroll;
+  margin-left: 2.5%;
+}
+.test {
+  width: 50%;
+
+  display: inline;
+}
+
+
+/* Notifications */
+.tabletemplates {
+ width: 90% !important;
+} 
+.notification {
+    display: inline-block;
+    position: relative;
+    padding: 0.6em;
+    background-color: #555555;
+    border-radius: 0.2em;
+    font-size: 1.3em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-req {
+  width: 7.5%;
+}
+
+.btn-footer {
+  width:10%;
+}
+.row-footer {
+  position: relative;
+  top: 22%;
+  right: 1%;
+  text-align: right;
+}
+.notification::before, 
+.notification::after {
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.epoapproved {
+   color: #555555;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  display: inline-block;
+  margin-left: 1%;
+  border-right: 1px solid #555555;
+  padding-right: 5px;
+}
+
+.epopending {
+  color: #2F2F2F;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  border-right: 1px solid #555555;
+  padding-right: 5px;
+}
+.epochecking {
+  color: #FF0000;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+}
+
+.notification::before {
+    display: block;
+    content: "\f0f3";
+    font-family: "FontAwesome";
+    transform-origin: top center;
+}
+.employee {
+    margin-top: 30px;
+}
+.createproj {
+    color: #2F2F2F;
+}
+
+.btn-tileworks {
+  position: relative; 
+  left: 68% ;
+}
+
+.notification::after {
+    font-family: Arial;
+    font-size: 0.7em;
+    font-weight: 700;
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    padding: 5px 8px;
+    line-height: 100%;
+    border: 2px #fff solid;
+    border-radius: 60px;
+    background: #3498db;
+    opacity: 0;
+    content: attr(data-count);
+    opacity: 0;
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    transition: transform, opacity;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+}
+
+.notification.notify::before {
+    -webkit-animation: ring 1.5s ease;
+    animation: ring 1.5s ease;
+}
+
+.notification.show-count::after {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+}
+
+@-webkit-keyframes ring {
+    0% {
+        -webkit-transform: rotate(35deg);
+    }
+    12.5% {
+        -webkit-transform: rotate(-30deg);
+    }
+    25% {
+        -webkit-transform: rotate(25deg);
+    }
+    37.5% {
+        -webkit-transform: rotate(-20deg);
+    }
+    50% {
+        -webkit-transform: rotate(15deg);
+    }
+    62.5% {
+        -webkit-transform: rotate(-10deg);
+    }
+    75% {
+        -webkit-transform: rotate(5deg);
+    }
+    100% {
+        -webkit-transform: rotate(0deg);
+    }
+}
+.headerrow {
+  width: 100%;
+  border-bottom: 3px solid #444444;
+}
+@keyframes ring {
+    0% {
+        -webkit-transform: rotate(35deg);
+        transform: rotate(35deg);
+    }
+    12.5% {
+        -webkit-transform: rotate(-30deg);
+        transform: rotate(-30deg);
+    }
+    25% {
+        -webkit-transform: rotate(25deg);
+        transform: rotate(25deg);
+    }
+    37.5% {
+        -webkit-transform: rotate(-20deg);
+        transform: rotate(-20deg);
+    }
+    50% {
+        -webkit-transform: rotate(15deg);
+        transform: rotate(15deg);
+    }
+    62.5% {
+        -webkit-transform: rotate(-10deg);
+        transform: rotate(-10deg);
+    }
+    75% {
+        -webkit-transform: rotate(5deg);
+        transform: rotate(5deg);
+    }
+    100% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+}
+.btncog {
+  background-color: white;
+  border: none;
+  color: grey;
+  padding: 17px;
+  cursor: pointer;
+}
+
+thead {
+  background-color: #444444; 
+}
+
+.spacing {
+    margin-top: 40px;
+}
+
+.text-input {
+    display: inline-block;
+    margin-left: 54px;
+    width: 400px;
+}
+.date-input {
+    margin-left: 29.2%;
+    color: #2F2F2F;
+}
+
+.projectinput {
+    color: #2F2F2F;
+    font-size: 20px;
+    letter-spacing: 0.08em;
+    margin-left: 5%;
+
+}
+
+
+.btnbell {
+  background-color: black;
+  border: none;
+  color: grey;
+  padding: 17px;
+  cursor: pointer;
+}
+
+.bell {
+    color: grey;
+    height: 50px;
+    border: none;
+    background-color: transparent;
+}
+
+
+
+.fixed tbody {
+    display:block;
+    height: 300px;
+    overflow-y: scroll;
+    font-weight: 500;
+}
+.fixed thead, tbody, tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}                 
+
+.fixed table {
+    width: 100%;
+}
+.btn-transparent {
+    background-color: transparent;
+    color: #7C7C7C;
+    margin-top: -15px;
+}
+.btn-save {
+    background-color: #25AB43;
+    margin-top: -15px;
+}
+
+div.settings {
+    display:grid;
+    grid-template-columns: max-content max-content;
+    grid-gap:5px;
+}
+div.settings label       { text-align:left; }
+div.settings label:after { content: ":"; }
+
+input[type=text] {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #AAAAAA;
+    margin-bottom: 15px;
+}
+.modal-content {
+     width: fit-content;
+}
+.modal-footer {
+    text-align: center;
+    padding: 25px;
+}
+
+.textright {
+  text-align: right;
+}
+
+.projectfooter {
+    margin-top: 18%;
+    margin-left: 70%;
+}
+.modal-title {
+    font-size: 24px;
+    letter-spacing: 0.08em;
+    font-weight: 400;
+    color: #2F2F2F;
+}
+.form {
+    padding: 15px;
+}
+.modal-body {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 30px;
+}
+tr {
+    text-align: center;
+}
+th {
+    text-align: center;
+}
+
+table.projects {
+    max-width: 100%;
+    margin: 0px;
+}
+
+.screen-responsive {
+  width: 100%;
+}
+h2 {
+    display:inline-block;
+}
+
+.filter {
+    width: 100%;
+    position: relative;
+    left: 1.5%;
+}
+.topfilter {
+  margin-top: 3%;
+}
+
+/* Dropdown Button */
+.dropbtn {
+  background-color: #2F2F2F;
+  color: white;
+  padding: 16px;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: "Open Sans";
+  border-radius: 100px;
+  cursor: pointer;
+  padding: 6px;
+  height: 24px;
+  width: 54px;
+
+
+}
+
+a.return {
+    margin-left: 2.8%;
+}
+a.font {
+   font-size: 16px;
+}
+
+p.material {
+    position: relative;
+    margin-left: 17px;
+}
+
+
+
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #3e8e41;
+}
+
+/* The search field */
+#myInput {
+  border-box: box-sizing;
+  background-image: url('searchicon.png');
+  background-position: 14px 12px;
+  background-repeat: no-repeat;
+  font-size: 16px;
+  padding: 14px 20px 12px 45px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+
+/* The search field when it gets focus/clicked on */
+#myInput:focus {outline: 3px solid #ddd;}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  right: 3%;
+  min-width: 230px;
+  border: 1px solid #ddd;
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+
+}
+
+h2.status {
+    position: relative;
+    margin-left: 100px;
+    font-size: 16px;
+    top: -5px;
+    color: green;
+}
+h2.total {
+  position: relative;
+  float: right;
+  font-weight: 600;
+  font-size: 24px;
+  letter-spacing: 0.05em;
+  color: rgba(0, 0, 0, 0.9);
+  right: 2%;
+}
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+
+.required label {
+    font-weight: bold;
+}
+
+.required label:after {
+    color: #CC2323;
+   
+    content: ' *';
+    display: inline-block;
+}
+
+.required label:h2 {
+     color: #CC2323;
+   
+    content: ' *';
+    display: inline-block;
+}
+
+.label1 {
+    margin-left: 40px;
+}
+
+.label2 {
+    margin-left: 40px;
+}
+
+form.proj {
+    margin-top: 0px;
+}
+label {
+    margin-bottom: 20px;
+}
+
+p.viewproject {
+    margin-left: 15px;
+    margin-bottom: 30px;
+}
+p.viewproject2 {
+    position: relative;
+    left: 7.8%;
+}
+p.viewproject3 {
+    position: relative;
+    left: 20%;
+
+}
+table.viewprojects {
+    position: relative;
+    left: 220px;
+}
+.btn-unit {
+    position: relative;
+    float: right;
+    right: 1.5%;
+
+}
+.test {
+  position: relative;
+  left: 0px;
+}
+.btn-primary {
+    border-radius: 20px;
+    background-color: #589EEF;
+}
+
+.modal-unit {
+    right: 60px;
+}
+
+.unit {
+    height: 30px !important;
+    position: relative;
+    bottom: 3px;
+}
+
+.materialsrow {
+    position: relative;
+    top: 30px;
+    left: 1.5%;
+}
+
+.materialsbutton {
+  width: 10%;
+}
+
+.materialinput {
+  margin-left: 4.7%;
+}
+
+.rowbody {
+  position: relative;
+  height: 200px;
+}
+
+.poapproved {
+  color: #555555;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  display: inline-block;
+  margin-left: 1%;
+  border-right: 1px solid #555555;
+  padding-right: 5px;
+}
+
+.popending {
+  color: #FF0000;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+
+}
+
+span.delivered {
+  color: green;
+}
+span.hold {
+  color: purple;
+}
+
+.engrow {
+  position: relative;
+  left: 1%;
+
+}
+a.option {
+  position: relative;
+  left: 5%;
+  padding-left: 5%;
+  font-size: 16px;
+  letter-spacing: 0.08em;
+  color: #555555;
+  font-weight: bold;
+
+}
+
+.btn-po {
+  width: 7%;
+  position: relative;
+  left: 30%;
+}
+
+.btn-hold {
+  background-color: #4825AB;
+}
+
+.btn-approve {
+  background-color: #25AB43;
+  color: white;
+}
+
+.btn-decline {
+  background-color: #CC2323;
+  color: white;
+}
+
+.btn-pushback {
+  background-color: #0A61C7;
+}
+
+.declinemodal {
+  color: black;
+  font-size: 24px;
+  letter-spacing: 0.08em;
+}
+.declinecenter {
+  position: relative;
+  right: 50%;
+}
+
+
+.sidebarfooter {
+  background-color: transparent;
+  color: #555555;
+  position: relative;
+  right: 8%;
+  border: none;
+}
+
+.createtemplaterow {
+  position: absolute;
+  left: 20%;
+ 
+}
+
+
+
+.tileworks {
+  margin-left: 0px;
+  margin-top: 20px;
+}
+.tileworksreturn {
+  margin-left: 0.2%;
+}
+
+input.textboxborder {
+  border: 1px solid #AAAAAA;
+}
+
+.form-control {
+  width: 50%;
+}
+
+.fix {
+  width: 100%;
+}
+
+.dashboard {
+  height: 100px;
+    width: 500px;
+    background: #F7F7F7;
+    color: #555555;
+    font-size: 40px;
+    border-radius: 5px;
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+}
+
+.dashboardright {
+  position: relative;
+  left: 20%;
+}
+
+/*# sourceMappingURL=bootstrap.css.map */

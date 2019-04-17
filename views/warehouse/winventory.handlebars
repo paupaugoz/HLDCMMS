@@ -1,0 +1,26 @@
+<div class="row">
+  <h1 class="page-header">{{pageHeader}}</h1>
+</div>
+
+<div class="row filter materialsrow textright">
+  <p>Item:</p>
+  <input class="textboxborder" type="text" name="item" id="item" placeholder="Enter item name here...">
+  <div class="dropdown">
+    <button onclick="filter()" class="dropbtn">Filter</button>
+    <div id="myDropdown" class="dropdown-content">
+      <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+      <a href="#about">Filter test</a>
+
+    </div>
+  </div>
+</div>
+<form action="/warehouse/update_inventory" method="POST" id="updateinventory-form" onsubmit="return getContent()">
+  <div class="fixed">
+    {{> table tableColumns=columns tableData=data}}
+  </div>
+
+  <div class="modal-footer ">
+    <a href="/warehouse/materials"><button type="button" class="btn btn-transparent">Cancel</button></a>
+    <button type="submit" class="btn btn-save">Update Inventory</button>
+  </div>
+</form>

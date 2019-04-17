@@ -1,0 +1,20 @@
+<a class="return" href="/management/materials">Return to Materials</a>
+<div class="row">
+  <h1 class="projheader">Create Material</h1>
+</div>
+<div class="row spacing">
+  <!-- form action input for inserting into mysql db-->
+  <form action="/management/postMaterialForm" target="_self" method="POST" id="creatematerials-form">
+    
+    <div class="required">
+      <h2 class="headercol1"><label for="projectname">MATERIAL NAME:</label></h2>
+    </div>
+    <div class="row">
+      <input class="text-input projectinput materialinput" type="text" name="materialName" required>
+    </div>
+</div>
+<div class="modal-footer projectfooter">
+  <a href="/management/materials"><button type="button" class="btn btn-transparent">Cancel</button></a>
+  <button type="submit" class="btn btn-save">Create Material</button>
+</div>
+</form>

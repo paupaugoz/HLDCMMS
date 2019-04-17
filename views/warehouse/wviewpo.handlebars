@@ -1,0 +1,60 @@
+<a class="font" href="/warehouse/po">Return to Purchase Orders</a>
+
+
+ <form action="/warehouse/postNewStatus"  method="POST" id="newpostatus-form">
+<div class="row">
+  <h1 class="viewheader">{{pageHeader}} {{item.id}}</h1>
+   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Edit Status</button>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="MyModal" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content fix">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Edit Status</h5>
+
+          </div>
+          <div class="modal-body">
+
+        <!-- post modal employee-->
+
+        <div class="settings">
+          <label for="status" class="col-form-label">Status</label>
+          <select class="unit" id="status" name="status" required>
+          <option disabled selected value></option>
+          <option>Approved</option>
+          <option>Pushback</option>
+          </select>
+        </div>
+ <div class="modal-footer">
+ <div class="row">
+        <button type="button" class="btn btn-transparent" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-save">Save</button>
+        </div>
+
+      </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+ </form>
+
+
+<div class="rowbody">
+  <div class="row">
+    <p class="viewproject"><strong>Status</strong>: <span class="delivered">{{item.status}}</span></p>
+  </div>
+  <div class="row">
+    <p class="viewproject"><strong>Supplier</strong>: {{item.supplier}}</p>
+  </div>
+  <div class="row">
+    <p class="viewproject"><strong>Date Created</strong>: {{item.dateCreated}}</p>
+  </div>
+  <div class="row">
+    <p class="viewproject"><strong>Requested By</strong>: {{item.orderedBy}}</p>
+  </div>
+
+  <div class="fixed ">
+    {{> table tableColumns=columns tableData=data}}
+  </div>
+</div>

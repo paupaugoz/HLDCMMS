@@ -1,0 +1,20 @@
+<a href="/engineer/projects">Return to Projects</a>
+<div class="row">
+  <h1 class="viewheader">Project {{item.id}}</h1>
+  <h2 class="status">Ongoing</h2>
+</div>
+<div class="row">
+  <p class="viewproject"><strong>Project Name</strong>: {{item.projectName}}</p>
+  <p class="viewproject2"><strong>Engineer Head</strong>: getfromemployeespositiontable</p>
+</div>
+<div class="row">
+  <p class="viewproject"><strong>No of Units:</strong> {{item.noofUnits}}</p>
+  <p class="viewproject3"><strong>Engineer-in-Charge:</strong> {{item.eic}}</p>
+</div>
+<div class="row filter">
+
+</div>
+
+<div class="fixed">
+  {{> table tableColumns=columns tableData=data}}
+</div>

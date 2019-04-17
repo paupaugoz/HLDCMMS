@@ -1,0 +1,367 @@
+<table class="table table-striped employee ">
+  <thead>
+    <div class="row">
+
+      <tr class="headerrow">
+    </div>
+
+    {{#each tableColumns as |column|}}
+
+    <th>{{column.value}}</th>
+    {{/each}}
+    </tr>
+  </thead>
+  <tbody>
+    {{#each tableData as |row|}}
+    <tr id={{row.id}}>
+      {{#../tableColumns as |col|}}
+      <td>
+
+        {{#if col.editable}}
+
+        {{#if ../../active.employees}}
+        <a value="edit" data-toggle="modal" data-target="#employeeModal">Edit</option></a>
+        <a>
+          <option value="delete" onclick="changeSelect('management/deleteEmployees', this.value, {{lookup row 'id'}})">
+            Delete</option>
+        </a>
+        <div class="modal fade" id="employeeModal" tabindex="-1" role="dialog" aria-labelledby="MyModal"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">New Employee</h5>
+
+              </div>
+              <div class="modal-body">
+
+                <!-- post modal employee-->
+                <form action="editEmployee" method="POST" id="newemployee-form">
+                  <div class="settings">
+                    <label for="first-name" class="col-form-label">First Name</label>
+                    <input type="text" id="first-name" name="first-name" required>
+                    <label for="last-name" class="col-form-label">Last Name</label>
+                    <input type="text" id="last-name" name="last-name" required>
+                    <label for="user-name" class="col-form-label">User Name</label>
+                    <input type="text" id="user-name" name="user-name" required>
+                    <label for="password" class="col-form-label">Password</label>
+                    <input type="text" id="password" name="password" required>
+                    <label for="position" class="col-form-label">Position</label>
+                    <select class="unit" id="myposition" name="myposition" required>
+                      <option disabled selected value></option>
+                      <option>Test</option>
+                    </select>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-transparent" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-save">Save</button>
+                </form>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        {{/if}}
+
+        {{#if ../../active.viewAPO}}
+        <a href="../management/viewapo/{{lookup row 'id'}}">View</option></a>
+        <a href="../management/pendingpo/{{lookup row 'id'}}">Pending PO</option></a>
+        <a value="edit" data-toggle="modal" data-target="#exampleModalCenter">Edit</option></a>
+        <a>
+          <option value="delete" onclick="changeSelect('management/deleteviewAPO', this.value, {{lookup row 'id'}})">
+            Delete</option>
+        </a>
+
+        {{/if}}
+
+        {{#if ../../active.projects}}
+        <a href="/management/viewprojects/{{lookup row 'id'}}">View</option></a>
+        <a href="/management/createbom/{{lookup row 'id'}}">Create BOM</option></a>
+        <a>
+          <option value="delete" onclick="changeSelect('management/deleteProjects', this.value, {{lookup row 'id'}})">
+            Delete</option>
+        </a>
+
+        {{/if}}
+
+
+
+        {{#if ../../active.viewprojects}}
+        <a value="edit" data-toggle="modal" data-target="#editProject">Edit</option></a>
+        <a value="delete">Delete</option></a>
+        <a>
+          <option value="delete"
+            onclick="changeSelect('management/deleteviewProjects', this.value, {{lookup row 'id'}})"> Delete</option>
+        </a>
+
+        <div class="modal fade" id="editProject" tabindex="-1" role="dialog" aria-labelledby="MyModal"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Edit Project</h5>
+
+              </div>
+              <div class="modal-body">
+
+                <!-- post modal employee-->
+                <form action="postEditProject" method="POST" id="editProject-form">
+                  <div class="settings">
+                    <label for="description" class="col-form-label">Description</label>
+                    <input type="text" id="description" name="description" required>
+                    <label for="template" class="col-form-label">Template Used</label>
+                    <select class="unit" id="template" name="template" required>
+                      <option disabled selected value></option>
+                      <option>Test</option>
+                    </select>
+                    <label for="status" class="col-form-label">Status</label>
+                    <input type="text" id="status" name="status" required>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-transparent" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-save">Save</button>
+                </form>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        {{/if}}
+
+        {{#if ../../active.createbom}}
+        <a value="edit" data-toggle="modal" data-target="#exampleModalCenter">Edit</option></a>
+        <a>
+          <option value="delete" onclick="changeSelect('management/deletecreateBom', this.value, {{lookup row 'id'}})">
+            Delete</option>
+        </a>
+
+        {{/if}}
+        {{#if ../../active.template}}
+        <a href="/management/createtemplate/{{lookup row 'id'}}">View</option></a>
+        <a value="edit" data-toggle="modal" data-target="#editTemplate">Edit</option></a>
+        <a>
+          <option value="delete"
+            onclick="changeSelect('management/deleteCreateTemplate', this.value, {{lookup row 'id'}})"> Delete</option>
+        </a>
+        <div class="modal fade" id="editTemplate" tabindex="-1" role="dialog" aria-labelledby="MyModal"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Edit Template</h5>
+
+              </div>
+              <div class="modal-body">
+
+                <!-- post modal employee-->
+                <form action="editTemplate" method="POST" id="editTemplate-form">
+                  <div class="settings">
+                    <label for="material" class="col-form-label">Material</label>
+                    <select class="unit" id="material" name="material" required>
+                      <option disabled selected value></option>
+                      <option>Load from materials</option>
+                    </select>
+                    <label for="quantity" class="col-form-label">Quantity</label>
+                    <input type="quantity" id="first-name" name="quantity" required>
+                    <label for="unit" class="col-form-label">Unit</label>
+                    <input type="text" id="unit" name="unit" required>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-transparent" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-save">Save</button>
+                </form>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        {{/if}}
+
+        {{#if ../../active.erequisition}}
+        <a href="/encoder/eviewrequisition/{{lookup row 'id'}}">View</option></a>
+        <a value="edit" data-toggle="modal" data-target="#editRequisition">Edit</option></a>
+        <a>
+          <option value="delete" onclick="changeSelect('encoder/deleteERequisition', this.value, {{lookup row 'id'}})">
+            Delete</option>
+        </a>
+
+        <div class="modal fade" id="editRequisition" tabindex="-1" role="dialog" aria-labelledby="MyModal"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+
+            <div class="modal-content modal-unit">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Edit New Requisition</h5>
+              </div>
+              <div class="modal-body">
+                <form action="postEditRequisition" method="POST" id="ereq2-form">
+
+                  <div class="settings">
+                    <label for="template" class="col-form-label">Category</label>
+                    <select class="unit" id="category" name="category" required>
+                      <option value></option>
+                      <option>Test</option>
+                      <!--Categories should exist in DB, no input-->
+                      {{#each templates}}
+                      <option value={{this.id}}>{{this.templateName}}</option>
+
+                      {{/each}}
+                    </select>
+                    <label for="description" class="col-form-label">Description</label>
+                    <select class="unit" id="description" name="description" required>
+                      <option value></option>
+                      <option>Test</option>
+
+                      <!--load from materials-->
+                      {{#each templates}}
+                      <option value={{this.id}}>{{this.templateName}}</option>
+
+                      {{/each}}
+
+                    </select>
+
+                    <label for="expecteddateofcompletion" class="col-form-label">Quantity</label>
+                    <input type="text" id="quantity" name="quantity" required>
+                    <label for="unit" class="col-form-label">Unit</label>
+                    <input type="text" id="unit" name="unit" required>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-transparent" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-save">Save</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{/if}}
+
+
+        {{#if ../../active.materials}}
+        <a value="edit" data-toggle="modal" data-target="#editMaterial">Edit</option></a>
+        <a>
+          <option value="delete" onclick="changeSelect('management/deleteMaterial', this.value, {{lookup row 'id'}})">
+            Delete</option>
+        </a>
+
+        <div class="modal fade" id="editMaterial" tabindex="-1" role="dialog" aria-labelledby="MyModal"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Edit Material</h5>
+
+              </div>
+              <div class="modal-body">
+
+                <!-- post modal employee-->
+
+                <div class="settings">
+                  <form action="editMaterial" method="POST" id="editMaterial-form">
+                    <label for="materialname" class="col-form-label">Material Name</label>
+                    <input type="text" id="materialname" name="materialname" required>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-transparent" data-dismiss="modal">Cancel</button>
+                  <button type="submit" class="btn btn-save">Save</button>
+                  </form>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+          </form>
+          {{/if}}
+
+
+
+          {{#if ../../active.wpendingpo}}
+          <button type="button" class="btn btn-left  btn-primary" data-toggle="modal"
+            data-target="#exampleModalCenter">Update Received Quantity</button>
+          {{/if}}
+
+          {{#if ../../active.wpo}}
+          <a href="/warehouse/wviewpo/{{lookup row 'id'}}">View</option>
+            <a href="/warehouse/wpendingpo/{{lookup row 'id'}}">View Pending</option>
+              {{/if}}
+
+              {{#if ../../active.wrequisition}}
+              <a href="/warehouse/wviewrequisition/{{lookup row 'id'}}">View</option>
+                <a>
+                  <option value="delete"
+                    onclick="changeSelect('warehouse/deletewRequisition', this.value, {{lookup row 'id'}})"> Delete
+                  </option>
+                </a>
+                {{/if}}
+
+                {{#if ../../active.engpo}}
+                <a href="/engineer/engviewpo/{{lookup row 'id'}}">Edit PO</option>
+                  <a>
+                    <option value="delete" onclick="changeSelect('engineer/deletePo', this.value, {{lookup row 'id'}})">
+                      Delete</option>
+                  </a>
+                  {{/if}}
+
+                  {{#if ../../active.engprojects}}
+                  <a href="/engineer/engviewprojects/{{lookup row 'id'}}">View</option>
+                    <a href="/engineer/engcreatebom/{{lookup row 'id'}}">Create BOM</option>
+                      {{/if}}
+
+                      {{else}}
+                      {{lookup row col.name}}
+                      {{/if}}
+        </div>
+      </td>
+      {{/../tableColumns}}
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+
+<script>
+  function changeSelect(context, value, itemId) {
+
+    console.log(itemId);
+    if (value == 'delete') {
+      // delete item
+      var stringdata = "{{json tableData}}";
+
+      var text = stringdata.replace(/&quot;/g, '"');
+
+      var data = JSON.parse(text);
+
+      var itemToPost = data.filter(function (item) {
+        return item.id == itemId;
+      })
+
+      var formData = new FormData();
+
+      formData.append("item", JSON.stringify(itemToPost[0]));
+
+      var xhr = new XMLHttpRequest();
+
+      xhr.onreadystatechange = function () { // Call a function when the state changes.
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+          //window.location.href = "../purchase"
+          //console.log("hello");
+
+        }
+      }
+      // Add any event handlers here...
+      xhr.open('POST', '/' + context, true);
+      xhr.send(formData);
+      var elem = document.getElementById(itemId.toString());
+      elem.parentNode.removeChild(elem);
+
+
+    } else {
+      window.location.href = value;
+    }
+  };
+</script>

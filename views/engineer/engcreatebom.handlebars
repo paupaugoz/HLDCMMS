@@ -1,0 +1,63 @@
+<div class="createtemplaterow">
+
+  <div class="sidebarmaterial">
+
+    <div class="bom-header">
+      <div class="sidebar-padding">
+
+        <h1>Unit Details</h1>
+
+        <strong>
+          <p>UNIT {{item.id}}</p>
+        </strong>
+        <div>
+          <strong>
+            <p>Template Used: </p>
+          </strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="bom-body">
+      <div class="sidebar-padding">
+        <p>CATEGORY</p>
+
+      </div>
+      <select class="dd headercol1" id="category" class="projdropdown" required>
+        <option disabled selected value></option>
+        <option>Fill category</option>
+      </select>
+    </div>
+    <div class="bom-body">
+      <div class="sidebar-padding">
+        <p>PHASES</p>
+      </div>
+      <select class="dd headercol1" id="phases" class="projdropdown" required>
+        <option disabled selected value></option>
+        <option>Fill phases</option>
+      </select>
+    </div>
+    <div class="sectionfooter">
+      <div class="sidebar-padding">
+        <button onclick="exportTableToCSV('members.csv')" class="sidebarfooter" type="button"
+          class="btn btn-save">Export</button>
+        <button class="sidebarfooter" type="button" class="btn btn-save">Print</button>
+        <button class="sidebarfooter" type="button" class="btn btn-save">Save</button>
+        <a href="/engineer/projects"><button class="sidebarfooter" type="button" class="btn btn-save">Cancel</button></a>
+
+      </div>
+    </div>
+
+  </div>
+  <a class="tileworksreturn" href="/engineer/projects">Return to Projects</a>
+  <div class="row tileworks">
+    <h1 class="page-header">Tileworks</h1>
+  </div>
+
+
+
+
+  <div class="fixed">
+    {{> table tableColumns=columns tableData=data}}
+  </div>
+</div>

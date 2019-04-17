@@ -1,0 +1,20 @@
+ 
+ <h1 class="page-header">{{pageHeader}}</h1>
+         
+ <div class="row filter materialsrow textright">
+          <p>Quarter:</p>
+          <select class="materialsbutton" id="selectElementId"></select>
+           <p>Year:</p>
+          <select class="materialsbutton" id="selectElementId"></select>
+          <div class="dropdown">
+  <button onclick="filter()" class="dropbtn">Filter</button>
+  <div id="myDropdown" class="dropdown-content">
+  <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+  <a href="#about">Filter test</a>
+    
+  </div>
+  </div>
+  <div class="fixed">
+           {{> table tableColumns=columns tableData=data}}
+           </div>
+  </div>

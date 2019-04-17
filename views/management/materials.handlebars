@@ -1,0 +1,27 @@
+<h1 class="page-header">{{pageHeader}}</h1>
+<a href="/management/materials/new"><button class="btn btn-primary">New Material</button></a>
+
+
+<div class="row filter materialsrow">
+  <p>Material:</p>
+
+  <!-- materials lookup from table-->
+
+  <select class="materialsbutton" id="materialsdropdown">
+    <option>
+      <!-- get materials from db-->
+    </option>
+  </select>
+
+  <div class="dropdown">
+    <button onclick="filter()" class="dropbtn">Filter</button>
+    <div id="myDropdown" class="dropdown-content">
+      <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+      <a href="#about">Filter test</a>
+    </div>
+  </div>
+</div>
+<div class="fixed">
+  {{> table tableColumns=columns tableData=data active=active}}
+</div>
+

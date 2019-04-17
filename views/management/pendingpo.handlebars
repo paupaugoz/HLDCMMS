@@ -1,0 +1,116 @@
+<a class="font" href="/management/po">Return to Purchase Orders</a>
+
+<a class="option" href="/management/projects">Print</a>
+<a class="option" href="/management/projects">Export</a>
+
+<div class="row">
+  <h1 class="viewheader">{{pageHeader}} {{item.id}}</h1>
+</div>
+
+<div class="rowbody">
+  <div class="row">
+    <p class="viewproject"><strong>Status</strong>: <span class="delivered">{{item.status}}</span></p>
+  </div>
+  <div class="row">
+    <p class="viewproject"><strong>Supplier</strong>: {{item.supplier}}</p>
+  </div>
+  <div class="row">
+    <p class="viewproject"><strong>Date Created</strong>: {{item.dateCreated}}</p>
+  </div>
+  <div class="row">
+    <p class="viewproject"><strong>Requested By</strong>: {{item.orderedBy}}</p>
+  </div>
+
+  <div class="fixed ">
+    {{> table tableColumns=columns tableData=data}}
+  </div>
+   <div class="row">
+            <h2 class="total">Total: Php 9999.99</h2>
+          </div>
+ 
+  <div class="row">
+    
+     <a href="#" ><button class="btn btn-po btn-approve btn-primary">Approve</button></a>
+     <button class="btn btn-po btn-decline btn-primary" data-toggle="modal" data-target="#Modal">Decline</button>
+     <button class="btn btn-po btn-pushback btn-primary" data-toggle="modal" data-target="#exampleModal">Pushback</button>
+  </div>
+
+
+ <form action="/poDecline" method="POST" id="podecline-form">
+  <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="MyModal" aria-hidden="true">
+ 
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content declinecenter">
+      <div class="modal-header">
+      </div>
+      <div class="modal-body">
+    
+        <div class="settings">
+         <h2 class="declinemodal ">Are you sure you want to decline this PO?</h2>
+         
+        </div>    
+    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-transparent" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-decline btn-transparent" >Decline</button>
+        
+
+      </div>
+      </div>
+    </div>
+  </div>
+</form>
+<form action="/postPushBackComment"  method="POST" id="postpushback-form">
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="MyModal" aria-hidden="true">
+ 
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+     
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Pushback Comments</h5>
+      </div>
+      <div class="modal-body">
+      <form>
+        <div class="settings">
+    
+
+          <textarea form="postpushback-form" id="pushbackcomments" name="pushbackcomments" rows="10" cols="45" placeholder="Write comments here..."></textarea>
+
+        </div>    
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-transparent" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-save" >Send</button>
+
+      </div>
+   
+      </div>
+    </div>
+  </div>
+   </form>
+
+</div>
+
+
+<script>
+ $('#postPushBackComment').submit(function(e) {
+    e.preventDefault();
+    // Coding
+    $('#MyModal').modal('hide');
+    return false;
+});
+</script>
+
+<script>
+ $('#poDecline').submit(function(e) {
+    e.preventDefault();
+    // Coding
+    $('#exampleModal').modal('hide');
+    return false;
+});
+</script>
+
+
+

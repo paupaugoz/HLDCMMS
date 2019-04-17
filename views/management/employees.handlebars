@@ -1,0 +1,56 @@
+
+ <h1 class="page-header">{{pageHeader}}</h1>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">New Employee</button>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="MyModal" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">New Employee</h5>
+
+          </div>
+          <div class="modal-body">
+
+        <!-- post modal employee-->
+      <form action="/management/employee/new"  method="POST" id="newemployee-form">
+        <div class="settings">
+          <label for="first-name" class="col-form-label">Full Name</label>
+          <input type="text" id="first-name" name="fullName" required>
+          <label for="user-name" class="col-form-label">email</label>
+          <input type="text" id="user-name" name="email" required>
+          <label for="user-name" class="col-form-label">user-name</label>
+          <input type="text" id="user-name" name="username" required>
+          <label for="password" class="col-form-label">Password</label>
+          <input type="text" id="password" name="password" required>
+          <label for="position" class="col-form-label">Position</label>
+          <select class="unit" id="myposition" name="userType" required>
+          <option disabled selected value></option>
+          <option value=0>Management</option>
+          <option value=1>Encoder</option>
+          <option value=2>Warehouse</option>
+          <option value=3>Engineer</option>
+          </select>
+        </div>
+ <div class="modal-footer">
+        <button type="button" class="btn btn-transparent" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-save">Save</button>
+       </form>
+      </div>
+     
+      </div>
+     
+    </div>
+  </div>
+</div>
+ <div class="fixed">
+
+ {{> table tableColumns=columns tableData=data}}
+</div>
+
+<script>
+ $('#postNewEmployee').submit(function(e) {
+    e.preventDefault();
+    // Coding
+    $('#ExampleModalCenter').modal('hide');
+    return false;
+});
+</script>

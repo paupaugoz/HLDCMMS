@@ -1,0 +1,566 @@
+const express = require('express');
+// eslint-disable-next-line new-cap
+const router = express.Router();
+const models = require('../database');
+const {
+    projectsColumns,
+    employeeColumns,
+    templatesColumns,
+    materialColumns,
+    poColumns,
+    poviewColumns,
+    viewprojectsColumns,
+    bomColumns,
+    purchaseReportColumn,
+    createtemplatesColumns,
+} = require('../config/vars');
+const Sequelize = require('sequelize');
+const exphbs = require('express-handlebars');
+const bcrypt = require("bcrypt-nodejs");
+
+
+router.get('/dashboard', (req, res) => {
+    models.User.findAll().then((users) => {
+        res.render('management/mdashboard', {
+            active: {
+                management: true,
+                dashboard: true,
+            },
+            data: users,
+            columns: employeeColumns,
+            pageHeader: "Welcome!",
+            helpers: {
+                json: function (a) {
+                    var stringified = JSON.stringify(a);
+                    return stringified.replace(/&quot;/g, '\\"');
+                }
+            }
+        });
+    })
+});
+
+
+router.get('/project_reports', (req, res) => {
+    models.User.findAll().then((users) => {
+        res.render('management/projectReports', {
+            active: {
+                management: true,
+                reports: true
+            },
+            data: users,
+            columns: employeeColumns,
+            pageHeader: "Reports",
+            helpers: {
+                json: function (a) {
+                    var stringified = JSON.stringify(a);
+                    return stringified.replace(/&quot;/g, '\\"');
+                }
+            }
+        });
+    })
+});
+
+router.get('/purchase_orders', (req, res) => {
+    models.User.findAll().then((users) => {
+        res.render('management/purchaseReports', {
+            active: {
+                management: true,
+                reports: true
+            },
+            data: users,
+            columns: employeeColumns,
+            pageHeader: "Reports",
+            helpers: {
+                json: function (a) {
+                    var stringified = JSON.stringify(a);
+                    return stringified.replace(/&quot;/g, '\\"');
+                }
+            }
+        });
+    });
+});
+
+router.get('/purchase_report/new', (req, res) => {
+    res.render('/management/generatePurchaseReport', {
+        active: {
+            management: true,
+            reports: true
+        },
+        data: purchaseReportData,
+        columns: purchaseReportColumn,
+        pageHeader: "Reports",
+        helpers: {
+            json: function (a) {
+                var stringified = JSON.stringify(a);
+                return stringified.replace(/&quot;/g, '\\"');
+            }
+        }
+    });
+});
+
+router.get('/project_report/new', (req, res) => {
+    res.render('management/generateProjectReport', {
+        active: {
+            management: true,
+            reports: true
+        },
+        data: bomData,
+        columns: bomColumns,
+        pageHeader: "Reports",
+        helpers: {
+            json: function (a) {
+                var stringified = JSON.stringify(a);
+                return stringified.replace(/&quot;/g, '\\"');
+            }
+        }
+    });
+});
+
+router.get('/employees', (req, res) => {
+    models.User.findAll({raw:true}).then((employeeData) => {
+        for(let i in employeeData){
+            employeeData[i].userType == 0? employeeData[i].userType = "Management" : true;
+            employeeData[i].userType == 1? employeeData[i].userType = "Encoder" : true;
+            employeeData[i].userType == 2? employeeData[i].userType = "Warehouse" : true;
+            employeeData[i].userType == 3? employeeData[i].userType = "Engineer" : true;
+        }
+        res.render('management/employees', {
+            active: {
+                management: true,
+                employees: true
+            },
+            data: employeeData,
+            columns: employeeColumns,
+            pageHeader: "Employees",
+            helpers: {
+                json: function (a) {
+                    var stringified = JSON.stringify(a);
+                    return stringified.replace(/&quot;/g, '\\"');
+                }
+            }
+        });
+    })
+});
+
+router.get('/projects', (req, res) => {
+    models.Project.findAll({
+        raw: true,
+        attributes: {
+            include: [Sequelize.col('EIC.fullName')]
+        },
+        include: [
+            {
+                model: models.User,
+                attributes: ['fullName'],
+                on: {
+                    id: Sequelize.where(Sequelize.col("project.engineerInCharge"), "=", Sequelize.col("EIC.id")),
+                },
+                as: 'EIC'
+            },
+        ]
+    }).then((projectsData) => {
+        models.Template.findAll().then((templatesData) => {
+            models.Material.findAll().then((materialsData)=>{
+                res.render('management/projects', {
+                    active: {
+                        management: true,
+                        projects: true
+                    },
+                    data: projectsData,
+                    columns: projectsColumns,
+                    templates: templatesData,
+                    materials:materialsData,
+                    pageHeader: "Projects",
+                    helpers: {
+                        json: function (a) {
+                            var stringified = JSON.stringify(a);
+                            return stringified.replace(/&quot;/g, '\\"');
+                        }
+                    }
+                });
+            })
+        })
+    })
+});
+
+router.get('/projects/new', (req, res) => {
+    models.User.findAll({ where: { userType: 3 } }).then((engineers) => {
+        res.render('management/createprojects', {
+            active: {
+                management: true,
+                projects: true
+            },
+            pageHeader: "Create a New Project",
+            engineerList: engineers
+        });
+    })
+});
+
+router.get('/viewprojects/:id', (req, res) => {
+    models.Project.findAll({
+        where: { id: req.params.id },
+        raw: true,
+        attributes: {
+            include: [[Sequelize.col('EIC.fullName'), 'EIC'], [Sequelize.col('EHEAD.fullName'), 'EHEAD']]
+        },
+        include: [
+            {
+                model: models.User,
+                attributes: ['fullName'],
+                on: {
+                    id: Sequelize.where(Sequelize.col("project.engineerInCharge"), "=", Sequelize.col("EIC.id")),
+                },
+                as: 'EIC'
+            },
+            {
+                model: models.User,
+                attributes: ['fullName'],
+                on: {
+                    id: Sequelize.where(Sequelize.col("project.engineerHead"), "=", Sequelize.col("EHEAD.id")),
+                },
+                as: 'EHEAD'
+            },
+        ]
+    }).then((viewprojectsData) => {
+        models.Template.findAll().then((templatesData)=>{
+            models.House.findAll({where:{projectId:req.params.id}}).then((houses)=>{
+                res.render('management/viewprojects', {
+                    active: {
+                        management: true,
+                        viewprojects: true
+                    },
+                    item: viewprojectsData[0],
+                    data: houses,
+                    columns: viewprojectsColumns,
+                    templates: templatesData,
+                    projectId:req.params.id,
+                    pageHeader: "Project",
+                    helpers: {
+                        json: function (a) {
+                            var stringified = JSON.stringify(a);
+                            return stringified.replace(/&quot;/g, '\\"');
+                        }
+                    }
+                });
+            })
+        })
+    })
+});
+
+router.get('/createbom/:id', (req, res) => {
+    models.Project.findByPk(req.params.id).then((projectsData) => {
+        res.render('management/createbom', {
+            active: {
+                management: true,
+                createbom: true
+            },
+            item: projectsData,
+            data: projectsData,
+            columns: purchaseReportColumn,
+            pageHeader: "BOM",
+            helpers: {
+                json: function (a) {
+                    var stringified = JSON.stringify(a);
+                    return stringified.replace(/&quot;/g, '\\"');
+                }
+            }
+        });
+    })
+});
+
+router.get('/po', (req, res) => {
+    models.PurchaseOrder.findAll().then((poData) => {
+        let approved = 0;
+        let pending = 0;
+        for (let data in poData) {
+            if (data.status == "pending") {
+                pending++;
+            }
+            else {
+                approved++;
+            }
+        }
+        res.render('management/po', {
+            active: {
+                management: true,
+                viewAPO: true,
+                highlight: true
+            },
+            data: poData,
+            columns: poColumns,
+            pendingCount: pending,
+            approvedCount: approved,
+            pageHeader: "Purchase Orders",
+            helpers: {
+                json: function (a) {
+                    var stringified = JSON.stringify(a);
+                    return stringified.replace(/&quot;/g, '\\"');
+                }
+            }
+        });
+    });
+});
+
+// Direct to view page based on item id if routerroved
+router.get('/po/:id', (req, res) => {
+    console.log(req.params.id);
+    var itemId = req.params.id;
+    var item = poData.find((a) => {
+        return a.id == itemId
+    });
+    console.log(item);
+    res.render('management/viewapo', {
+        active: {
+            management: true,
+            viewAPO: true,
+            highlight: true
+        },
+        item: poData.find((a) => {
+            return a.id == itemId
+        }),
+        data: poviewData,
+        columns: poviewColumns,
+        pageHeader: "Purchase Orders",
+        helpers: {
+            json: function (a) {
+                var stringified = JSON.stringify(a);
+                return stringified.replace(/&quot;/g, '\\"');
+            }
+        }
+    });
+});
+
+
+//Direct to view page based on item id if pending
+router.get('/po/:id/pending', (req, res) => {
+    console.log(req.params.id);
+    var itemId = req.params.id;
+    var item = poData.find((a) => {
+        return a.id == itemId
+    });
+    console.log(item);
+    res.render('management/pendingpo', {
+        active: {
+            management: true,
+            pendingPO: true,
+            highlight: true
+        },
+        item: poData.find((a) => {
+            return a.id == itemId
+        }),
+        data: poviewData,
+        columns: poviewColumns,
+        pageHeader: "Purchase Orders",
+        helpers: {
+            json: function (a) {
+                var stringified = JSON.stringify(a);
+                return stringified.replace(/&quot;/g, '\\"');
+            }
+        }
+    });
+});
+
+/* Direct to view page based on item id if pending
+router.get('/viewapo/:id', (req, res) => {
+  console.log(req.params.id);
+  var itemId = req.params.id;
+  var item = poData.find((a) => {return a.id == itemId});
+  console.log(item);
+  res.render('management/viewapo', { active: {PO: true}, item: poData.find((a) => {return a.id == itemId}), data: poviewData, columns: poviewColumns, pageHeader: "Purchase Orders"});
+});
+*/
+
+
+router.get('/templates', (req, res) => {
+    models.Template.findAll().then((templatesData) => {
+        res.render('management/templates', {
+            active: {
+                management: true,
+                templates: true
+            },
+            data: templatesData,
+            columns: templatesColumns,
+            pageHeader: "Templates",
+            helpers: {
+                json: function (a) {
+                  var stringified = JSON.stringify(a);
+                  return stringified.replace(/&quot;/g, '\\"');
+                }
+            } 
+        });
+    })
+});
+
+router.get('/templates/new', (req, res) => {
+    models.Template.findAll().then((templatesData) => {
+        res.render('management/createtemplate', {
+            active: {
+                management: true,
+                templates: true,
+                createtemplate: true
+            },
+            data: templatesData,
+            columns: createtemplatesColumns,
+            pageHeader: "Templates",
+            helpers: {
+                json: function (a) {
+                    var stringified = JSON.stringify(a);
+                    return stringified.replace(/&quot;/g, '\\"');
+                }
+            }
+        });
+    })
+});
+
+router.get('/materials', (req, res) => {
+    models.Material.findAll().then((materialData) => {
+        res.render('management/materials', {
+            active: {
+                management: true,
+                materials: true
+            },
+            data: materialData,
+            columns: materialColumns,
+            pageHeader: "Materials",
+            helpers: {
+                json: function (a) {
+                    var stringified = JSON.stringify(a);
+                    return stringified.replace(/&quot;/g, '\\"');
+                }
+            }
+        });
+    })
+});
+
+router.get('/materials/new', (req, res) => {
+    res.render('management/creatematerials', {
+        active: {
+            management: true,
+            materials: true
+        }
+    });
+});
+
+router.post('/postMaterialForm', function (req, res) {
+    models.Material.create(req.body).then(() => {
+        res.redirect('/management/materials');
+    })
+});
+
+// Create project form
+router.post('/projects/new', function (req, res) {
+    models.Project.create(req.body).then(() => {
+        res.redirect('/management/projects');
+    });
+});
+
+//Employee modal form
+router.post('/employee/new', function (req, res) {
+    req.body.password = encryptPassword(req.body.password)
+    models.User.create(req.body).then(() => {
+        res.redirect('/management/employees');
+    });
+});
+
+//Pending PO decline
+router.post('/po/decline', function (req, res) {
+    console.log(req.body);
+    res.redirect('/management/po');
+});
+
+//Management pushback comments form
+router.post('/postPushBackComment', function (req, res) {
+    console.log(req.body);
+    res.redirect('/management/po');
+});
+
+router.post('/postCreateTemplateForm', function (req, res) {
+    console.log(req.body);
+    res.redirect('/management/templates/new');
+});
+
+router.post('/postViewProjectsForm', function (req, res) {
+    models.Template.findByPk(req.body.templateId).then((template)=>{
+        req.body.template=template.templateName
+        models.House.create(req.body).then(()=>{
+            res.redirect('/management/projects');
+        })
+    })
+});
+
+function encryptPassword(plaintext) {
+    const salt = bcrypt.genSaltSync(10);
+    const password = bcrypt.hashSync(plaintext, salt);
+    return (password);
+}
+
+//Edit PO
+router.post('/po/edit', function (req, res) {
+    console.log(req.body);
+    res.redirect('/management/po');
+});
+
+//Edit employee
+router.post('/editEmployee', function (req, res) {
+    console.log(req.body);
+    res.redirect('./employees');
+});
+
+//Edit template
+router.post('/editTemplate', function (req, res) {
+    console.log(req.body);
+    res.redirect('./createtemplate');
+});
+
+//Edit project
+router.post('/postEditProject', function (req, res) {
+    console.log(req.body);
+    res.redirect('/management/projects');
+});
+
+//Delete management
+
+
+router.post('/deleteEmployees', function (req, res) {
+    models.User.destroy({where:{id:JSON.parse(req.body.item).id}})
+    console.log(req.body);
+});
+
+router.post('/deleteProjects', function (req, res) {
+    console.log(req.body);
+});
+
+router.post('/deleteviewAPO', function (req, res) {
+    console.log(req.body);
+});
+
+router.post('/deleteviewProjects', function (req, res) {
+    console.log(req.body);
+});
+
+router.post('/deletecreateBom', function (req, res) {
+    console.log(req.body);
+});
+
+router.post('/deleteCreateTemplate', function (req, res) {
+    console.log(req.body);
+});
+
+router.post('/deleteMaterial', function (req, res) {
+    models.Material.destroy({where:{
+        id:JSON.parse(req.body.item).id}
+    })
+    console.log(req.body);
+});
+
+//Edit materials
+router.post('/editMaterial', function (req, res) {
+    console.log(req.body);
+    res.redirect('./materials');
+});
+
+router.post('/deleteviewAPO', function (req, res) {
+    console.log(req.body);
+});
+
+module.exports = router

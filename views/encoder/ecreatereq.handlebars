@@ -1,0 +1,47 @@
+
+   <a class="return font" href="/encoder/requisition">Return to Requisition Form</a>
+   <div class="row">
+         <h1 class="projheader">{{pageHeader}}</h1>
+        </div>
+        <div class="row spacing">
+         <form action="/encoder/posteReq1"  method="POST" id="eReq1-form">
+          <div class="required">
+            <h2 class="headercol1"><label for="deliverylocation">DELIVERY LOCATION</label></h2>
+            <h2 class="headercol2 label1"><label for="startdate">REQUISITION DATE:</label></h2>
+          </div>
+          <div class="row">
+            <input class="text-input projectinput" type="text" name="deliverylocation" required>
+            <input class="reqdate" type="date" name="startdate" required>
+          </div>
+          <div class="required">
+            <h2 class="headercol1"><label for="unit">UNIT:</label></h2>
+          </div>
+          <div class="row">
+            <select class="dd headercol1" id = "unit" name="unit" class="projdropdown" required>
+            <option disabled selected value></option>
+            <option>fill</option>
+           </select>
+         </div>
+          <div class="required">
+          <h2 class="headercol1"><label for="phase">PHASE</label></h2>
+          <div class="row">
+            <select class="dd headercol1" id = "phase" class="projdropdown" required>
+            <option disabled selected value></option>
+            <option>fill</option>
+           </select>
+         </div>
+          <div class="required">
+          <h2 class="headercol1"><label for="category">CATEGORY</label></h2>
+          <div class="row">
+            <select class="dd headercol1" id = "category" class="projdropdown" required>
+            <option disabled selected value></option>
+            <option>fill</option>
+           </select>
+         </div>
+     
+        </div>
+         <div class="modal-footer projectfooter">
+        <a href="/encoder/requisition"><button type="button" class="btn btn-transparent">Cancel</button></a>
+        <button type="submit" class="btn btn-save">NEXT</button>
+      </form>
+      </div>

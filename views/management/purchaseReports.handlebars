@@ -1,0 +1,103 @@
+<h1 class="page-header">{{pageHeader}}</h1>
+<div class="row">
+  <ul class="nav nav-tabs proj">
+    <li ><a href="/management/project_reports">Projects</a></li>
+    <li class="active"><a href="#">Purchase Orders</a></li>
+
+</ul>
+</div>
+<div class="row proj">
+  <h3>View Purchase Report Summary By:</h3>
+</div>
+
+<div class="row proj">
+  <h3>1. Select Filters:
+</div>
+<div class="row proj margin-top">
+  <div class="col-sm-9 col-md-3">
+    <select id="selectProject">
+    <option >Select Project</option>
+  </select>
+  </div>
+  <div class="col-sm-9 col-md-3">
+    <select id="selectProject">
+    <option >Select Project</option>
+  </select>
+  </div>
+  <div class="col-sm-9 col-md-3">
+    <select id="selectProject">
+    <option >Select Project</option>
+  </select>
+  </div>
+  <div class="col-sm-9 col-md-3">
+    <select id="selectProject">
+    <option >Select Project</option>
+  </select>
+  </div>
+  </div>
+  <div class="row proj">
+  <div class="col-sm-9 col-md-3">
+    <select id="selectProject">
+    <option >Select Project</option>
+  </select>
+  </div>
+</div>
+
+<div class="projectfooter">
+   <a href="#"><button type="button" class="reports btn btn-transparent" >Back</button></a>
+   <a href="/management/purchase_report/new"><button type="button" class="reports btn btn-save" >Generate Report</button></a>
+</div>
+
+</div>
+
+
+<!-- Filter-->
+
+</div>
+
+
+<script>
+ $('#postViewProjectsForm').submit(function(e) {
+    e.preventDefault();
+    // Coding
+    $('#ExampleModalCenter').modal('hide');
+    return false;
+});
+</script>
+
+
+<script>
+  var min = 1990,
+    max = 2095,
+    select = document.getElementById('selectElementId');
+
+  for (var i = min; i <= max; i++) {
+    var opt = document.createElement('option');
+    opt.value = i;
+    opt.innerHTML = i;
+    select.appendChild(opt);
+    select.value = new Date().getFullYear();
+  }
+</script>
+
+<script>
+  function filter() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+
+  function filterFunction() {
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    div = document.getElementById("myDropdown");
+    a = div.getElementsByTagName("a");
+    for (i = 0; i < a.length; i++) {
+      txtValue = a[i].textContent || a[i].innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        a[i].style.display = "";
+      } else {
+        a[i].style.display = "none";
+      }
+    }
+  }
+</script>

@@ -1,0 +1,53 @@
+<a class="return font" href="/management/projects">Return to Projects</a>
+<div class="row">
+  <h1 class="projheader">{{pageHeader}}</h1>
+</div>
+<div class="row spacing">
+
+  <!--form action-->
+  <form action="/management/projects/new" method="POST" id="createprojects-form">
+
+
+    <div class="required">
+      <h2 class="headercol1"><label for="projectname">PROJECT NAME:</label></h2>
+      <h2 class="headercol2 label1"><label for="startdate">START DATE:</label></h2>
+    </div>
+    <div class="row">
+      <input class="text-input projectinput" type="text" name="projectName" required>
+      <input class="date-input" type="date" name="startDate" required>
+    </div>
+    <div class="required">
+      <h2 class="headercol1"><label for="projectlocation">PROJECT LOCATION:</label></h2>
+      <h2 class="headercol3 "><label class="label2" for="completiondate">EXPECTED DATE OF COMPLETION:</label></h2>
+    </div>
+    <div class="row">
+      <input class="text-input projectinput" type="text" name="projectLocation" required>
+      <input class="date-input" type="date" name="completionDate" required>
+    </div>
+    <div class="required">
+      <h2 class="headercol1"><label for="engineer-in-charge">ENGINEER-IN-CHARGE:</label></h2>
+      <div class="row">
+        <select class="dd headercol1" id="engineer-in-charge" name="engineerInCharge" class="projdropdown" required>
+          <option disabled selected value></option>
+          {{#each engineerList}}
+            <option value={{this.id}}>{{this.fullName}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="required">
+        <h2 class="headercol1"><label for="engineer-in-charge">ENGINEER HEAD:</label></h2>
+        <div class="row">
+          <select class="dd headercol1" id="engineer-in-charge" name="engineerHead" class="projdropdown" required>
+            <option disabled selected value></option>
+            {{#each engineerList}}
+              <option value={{this.id}}>{{this.fullName}}</option>
+            {{/each}}          
+          </select>
+        </div>
+
+      </div>
+      <div class="modal-footer projectfooter">
+        <a href="/management/projects"><button type="button" class="btn btn-transparent">Cancel</button></a>
+        <button type="submit" class="btn btn-save">Submit</button>
+      </div>
+  </form>
