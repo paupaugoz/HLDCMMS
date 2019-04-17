@@ -26,35 +26,41 @@ router.get('/dashboard', (req, res) => {
 router.get('/po', (req, res) => {
     models.PurchaseOrder.findAll().then((poData) => {
         models.Material.findAll().then((material)=>{
-            res.render('encoder/epo', {
-                active: {
-                    encoder: true,
-                    epo: true
-                },
-                data: poData,
-                columns: poColumns,
-                materials: material,
-                pageHeader: "Create a New Purchase Order",
-                helpers: {
-                    json: function (a) {
-                        var stringified = JSON.stringify(a);
-                        return stringified.replace(/&quot;/g, '\\"');
+            models.Project.findAll().then((projects)=>{
+                res.render('encoder/epo', {
+                    active: {
+                        encoder: true,
+                        epo: true
+                    },
+                    data: poData,
+                    columns: poColumns,
+                    materials: material,
+                    projects: projects,     
+                    pageHeader: "Create a New Purchase Order",
+                    helpers: {
+                        json: function (a) {
+                            var stringified = JSON.stringify(a);
+                            return stringified.replace(/&quot;/g, '\\"');
+                        }
                     }
-                }
-            });
+                });
+            })
         })
     })
 });
 
 router.get('/po/new',(req,res)=>{
     models.Material.findAll().then((material)=>{
-        res.render('encoder/ecreatepo2',{
-            active: {
-                encoder: true,
-                epo: true
-            },
-            pageHeader: "Create a New Purchase Order",
-            materials:material
+        models.Project.findAll().then((projects)=>{
+            res.render('encoder/ecreatepo2',{
+                active: {
+                    encoder: true,
+                    epo: true
+                },
+                pageHeader: "Create a New Purchase Order",
+                projects: projects,
+                materials:material
+            })  
         })
     })
 })

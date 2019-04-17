@@ -10,6 +10,12 @@
   <label for="templatename">DATE ORDERED</label>
   <input type="date" id="dateOrdered" name="description">
 
+  <select class="unit" id="project" name="material" required>
+    {{#each projects}}
+    <option value={{this.id}}>{{this.projectName}}</option>
+    {{/each}}
+  </select>
+
   <br>
   <button type="submit" class="btn btn-tileworks btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
     Add Material
@@ -71,31 +77,11 @@
           description: document.getElementById('description').value,
           supplier: document.getElementById('supplier').value,
           dateOrdered: document.getElementById('dateOrdered').value,
+          projectId: document.getElementById('project').value,
           materials: poMaterials
         }));
       window.location.replace('/encoder/po')
     }
-    
-    function loadXMLDoc() {
-    var xmlhttp = new XMLHttpRequest();
-
-    xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
-           if (xmlhttp.status == 200) {
-               document.getElementById("myDiv").innerHTML = xmlhttp.responseText;
-           }
-           else if (xmlhttp.status == 400) {
-              alert('There was an error 400');
-           }
-           else {
-               alert('something else other than 200 was returned');
-           }
-        }
-    };
-
-    xmlhttp.open("GET", "ajax_info.txt", true);
-    xmlhttp.send();
-}
 
     function add() {
       var a = document.getElementById('material').value;

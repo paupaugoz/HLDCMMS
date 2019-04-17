@@ -17,6 +17,7 @@ const {
 const Sequelize = require('sequelize');
 const exphbs = require('express-handlebars');
 const bcrypt = require("bcrypt-nodejs");
+const Op = Sequelize.Op;
 
 
 router.get('/dashboard', (req, res) => {
@@ -42,41 +43,47 @@ router.get('/dashboard', (req, res) => {
 
 router.get('/project_reports', (req, res) => {
     models.User.findAll().then((users) => {
-        res.render('management/projectReports', {
-            active: {
-                management: true,
-                reports: true
-            },
-            data: users,
-            columns: employeeColumns,
-            pageHeader: "Reports",
-            helpers: {
-                json: function (a) {
-                    var stringified = JSON.stringify(a);
-                    return stringified.replace(/&quot;/g, '\\"');
+        models.Project.findAll().then((projects)=>{
+            res.render('management/projectReports', {
+                active: {
+                    management: true,
+                    reports: true
+                },
+                data: users,
+                columns: employeeColumns,
+                pageHeader: "Reports",
+                projects: projects,
+                helpers: {
+                    json: function (a) {
+                        var stringified = JSON.stringify(a);
+                        return stringified.replace(/&quot;/g, '\\"');
+                    }
                 }
-            }
-        });
+            });
+        })
     })
 });
 
 router.get('/purchase_orders', (req, res) => {
     models.User.findAll().then((users) => {
-        res.render('management/purchaseReports', {
-            active: {
-                management: true,
-                reports: true
-            },
-            data: users,
-            columns: employeeColumns,
-            pageHeader: "Reports",
-            helpers: {
-                json: function (a) {
-                    var stringified = JSON.stringify(a);
-                    return stringified.replace(/&quot;/g, '\\"');
+        models.Project.findAll().then((projects)=>{
+            res.render('management/purchaseReports', {
+                active: {
+                    management: true,
+                    reports: true
+                },
+                data: users,
+                columns: employeeColumns,
+                projects: projects,
+                pageHeader: "Reports",
+                helpers: {
+                    json: function (a) {
+                        var stringified = JSON.stringify(a);
+                        return stringified.replace(/&quot;/g, '\\"');
+                    }
                 }
-            }
-        });
+            });
+        })
     });
 });
 
@@ -246,6 +253,19 @@ router.get('/viewprojects/:id', (req, res) => {
         })
     })
 });
+
+
+router.get('/po/report', (req, res) => {
+    console.log(req.query);
+    let _where = {projectId: parseInt(req.query.projectId)};
+    req.query.startDate == ''? delete req.query.startDate : _where.createdAt={[Op.gt]: req.query.startDate}
+    req.query.endDate == ''? delete req.query.endDate : _where.createdAt={[Op.lt]: req.query.endDate}
+    console.log(_where)
+    models.PurchaseOrder.findAll({where:_where}).then((purchase)=>{
+        console.log(purchase)
+    });
+})
+
 
 router.get('/createbom/:id', (req, res) => {
     models.Project.findByPk(req.params.id).then((projectsData) => {
@@ -549,7 +569,7 @@ router.post('/deleteEmployees', function (req, res) {
 });
 
 router.post('/deleteProjects', function (req, res) {
-    console.log(req.body);
+    models.Project.destroy({where:{id:JSON.parse(req.body.item).id}})
 });
 
 router.post('/deleteviewAPO', function (req, res) {

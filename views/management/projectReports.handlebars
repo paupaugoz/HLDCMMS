@@ -15,31 +15,11 @@
 </div>
 <div class="row proj margin-top">
   <div class="col-sm-9 col-md-3">
-    <select id="selectProject">
-    <option >Select Project</option>
-  </select>
-  </div>
-  <div class="col-sm-9 col-md-3">
-    <select id="selectProject">
-    <option >Select Project</option>
-  </select>
-  </div>
-  <div class="col-sm-9 col-md-3">
-    <select id="selectProject">
-    <option >Select Project</option>
-  </select>
-  </div>
-  <div class="col-sm-9 col-md-3">
-    <select id="selectProject">
-    <option >Select Project</option>
-  </select>
-  </div>
-  </div>
-  <div class="row proj margin-top">
-  <div class="col-sm-9 col-md-3">
-    <select id="selectProject">
-    <option >Select Project</option>
-  </select>
+    <select id="project">
+      {{#each projects}}
+        <option value={{this.id}}>{{this.projectName}}</option>
+      {{/each}}
+    </select>
   </div>
 </div>
 
