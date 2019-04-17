@@ -89,7 +89,11 @@
 
         {{#if ../../active.viewprojects}}
         <a value="edit" data-toggle="modal" data-target="#editProject">Edit</option></a>
-        <a href="/management/house/delete/{{lookup row 'id'}}" value="delete">Delete</option></a>
+        <!--<a href="/management/house/delete/{{lookup row 'id'}}" value="delete">Delete</option></a>
+        --> <a>
+          <option value="delete" onclick="changeSelect('management/deleteviewProjects', this.value, {{lookup row 'id'}})">
+            Delete</option>
+        </a>
 
         <div class="modal fade" id="editProject" tabindex="-1" role="dialog" aria-labelledby="MyModal"
           aria-hidden="true">
@@ -134,8 +138,8 @@
         </a>
 
         {{/if}}
-        {{#if ../../active.template}}
-        <a href="/management/createtemplate/{{lookup row 'id'}}">View</option></a>
+        {{#if ../../active.templates}}
+        <a href="/management/viewtemplates/{{lookup row 'id'}}">View</option></a>
         <a value="edit" data-toggle="modal" data-target="#editTemplate">Edit</option></a>
         <a>
           <option value="delete"

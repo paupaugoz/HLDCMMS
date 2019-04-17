@@ -214,6 +214,11 @@ let viewprojectsColumns = [{
     "value": "ID",
     "editable": false
 },{
+    "name": "description",
+    "value": "Description",
+    "editable": false
+},
+{
     "name": "createdAt",
     "value": "Date Created",
     "editable": false
