@@ -82,6 +82,15 @@ sequelize.sync({alter: true, force: true}).then(()=>{
         comments:"",
         materials:'[{"material":"Sand","quantity":"10","unit_price":"100","total_price":1000},{"material":"Sand","quantity":"10","unit_price":"100","total_price":1000},{"material":"Sand","quantity":"10","unit_price":"100","total_price":1000}]',
         orderedBy: 'B Matriano',
+        projectId: 1,
+        dateOrdered:'12/12/1999'
+    }});
+    PurchaseOrder.findCreateFind({where:{
+        description:"Need more sand to complete this project",
+        comments:"",
+        materials:'[{"material":"Sand","quantity":"10","unit_price":"100","total_price":1000},{"material":"Sand","quantity":"10","unit_price":"100","total_price":1000},{"material":"Sand","quantity":"10","unit_price":"100","total_price":1000}]',
+        orderedBy: 'B Matriano',
+        projectId: 1,
         dateOrdered:'12/12/1999'
     }});
     User.findCreateFind({where:{

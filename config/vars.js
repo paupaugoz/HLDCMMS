@@ -310,29 +310,14 @@ let purchaseReportColumn = [{
     "name": "quantity",
     "value": "Quantity",
     "editable": false
-}, {
-    "name": "unit",
-    "value": "Unit",
+}, 
+    {
+    "name": "unit_price",
+    "value": "Average Unit Price",
     "editable": false
 }, {
-    "name": "quantityUsed",
-    "value": "Phase 1 Quantity",
-    "editable": false
-}, {
-    "name": "quantityUsed2",
-    "value": "Phase 2 Quantity",
-    "editable": false
-}, {
-    "name": "quantityUsed3",
-    "value": "Phase 3 Quantity",
-    "editable": false
-}, {
-    "name": "total",
+    "name": "total_price",
     "value": "Total Quantity",
-    "editable": false
-}, {
-    "name": "totalCost",
-    "value": "total Cost",
     "editable": false
 }]
 

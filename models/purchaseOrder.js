@@ -31,5 +31,9 @@ module.exports = (sequelize, type) => {
       type: Sequelize.DATE,
       allowNull: false,
     },
+    projectId: {
+      type: Sequelize.INTEGER,
+      allowNull: true
+    }
   });
 };

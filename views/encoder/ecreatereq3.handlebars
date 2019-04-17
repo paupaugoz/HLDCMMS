@@ -1,5 +1,5 @@
 <div class="createtemplaterow">
-  <h2>Create Purchase Order</h2>
+  <h2>Create Requisition Order</h2>
   <br />
   <label for="templatename">PO DESCRIPTION</label>
   <input type="text" id="description" name="description">
@@ -26,8 +26,6 @@
     <thead>
       <th>Material</th>
       <th>Quantity</th>
-      <th>Unit Price</th>
-      <th>Total</th>
     </thead>
     <tbody id="templateMaterials">
 
@@ -53,8 +51,6 @@
           </select>
           <label for="quantity" class="col-form-label">Quantity</label>
           <input type="quantity" id="quantity" name="quantity" required>
-          <label for="quantity" class="col-form-label">Unit Price</label>
-          <input type="quantity" id="unit_price" name="quantity" required>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-transparent" data-dismiss="modal">Cancel</button>
@@ -71,7 +67,7 @@
 
     function send() {
       var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-      xmlhttp.open("POST", "/encoder/po/new");
+      xmlhttp.open("POST", "/encoder/req/new");
       xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
       xmlhttp.send(JSON.stringify({
           description: document.getElementById('description').value,
@@ -86,36 +82,24 @@
     function add() {
       var a = document.getElementById('material').value;
       var b = document.getElementById('quantity').value;
-      var c = document.getElementById('unit_price').value;
-      if (a != '' && b != '' && c != '') {
+      if (a != '' && b != '') {
         var tr_node = document.createElement("tr")
 
         var material_node = document.createElement('td')
         material_node.innerHTML = a
         var quantity_node = document.createElement('td')
         quantity_node.innerHTML = b
-        var unit_price_node = document.createElement('td')
-        unit_price_node.innerHTML = c
-        var total_node = document.createElement('td')
-        total_node.innerHTML = parseFloat(b) * parseFloat(c)
-
         tr_node.appendChild(material_node)
         tr_node.appendChild(quantity_node)
-        tr_node.appendChild(unit_price_node)
-        tr_node.appendChild(total_node)
 
         poMaterials.push({ 
           material: a, 
           quantity: b, 
-          unit_price: c, 
-          total_price: parseFloat(b) * parseFloat(c)
         });
 
         document.getElementById('templateMaterials').appendChild(tr_node)
       }
       console.log(a)
       console.log(b)
-      console.log(c)
-
     }
   </script>
