@@ -16,7 +16,7 @@ module.exports = (sequelize, type) => {
       allowNull: true,
     },
     materials: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.TEXT('LONG'),
       allowNull: false,
     },
     supplier: {

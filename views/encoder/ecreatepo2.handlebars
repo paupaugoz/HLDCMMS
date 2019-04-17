@@ -1,0 +1,135 @@
+<div class="createtemplaterow">
+  <h2>Create Purchase Order</h2>
+  <br />
+  <label for="templatename">PO DESCRIPTION</label>
+  <input type="text" id="description" name="description">
+  
+  <label for="templatename">SUPPLIER</label>
+  <input type="text" id="supplier" name="description">
+
+  <label for="templatename">DATE ORDERED</label>
+  <input type="date" id="dateOrdered" name="description">
+
+  <br>
+  <button type="submit" class="btn btn-tileworks btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    Add Material
+  </button>
+  <button onclick="send()" class="btn btn-tileworks btn-primary" id="saveTemplate">Send PO</button>
+
+  <table>
+    <thead>
+      <th>Material</th>
+      <th>Quantity</th>
+      <th>Unit Price</th>
+      <th>Total</th>
+    </thead>
+    <tbody id="templateMaterials">
+
+    </tbody>
+  </table>
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="MyModal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">New Material</h5>
+      </div>
+      <div class="modal-body">
+        <!-- post modal employee-->
+        <div class="settings">
+          <label for="material" class="col-form-label">Material</label>
+          <select class="unit" id="material" name="material" required>
+            {{#each materials}}
+            <option value={{this.materialName}}>{{this.materialName}}</option>
+            {{/each}}
+          </select>
+          <label for="quantity" class="col-form-label">Quantity</label>
+          <input type="quantity" id="quantity" name="quantity" required>
+          <label for="quantity" class="col-form-label">Unit Price</label>
+          <input type="quantity" id="unit_price" name="quantity" required>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-transparent" data-dismiss="modal">Cancel</button>
+          <button onclick="add()" id="saveMaterial" class="btn btn-save">Save</button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    var poMaterials = []
+
+    function send() {
+      var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+      xmlhttp.open("POST", "/encoder/po/new");
+      xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xmlhttp.send(JSON.stringify({
+          description: document.getElementById('description').value,
+          supplier: document.getElementById('supplier').value,
+          dateOrdered: document.getElementById('dateOrdered').value,
+          materials: poMaterials
+        }));
+      window.location.replace('/encoder/po')
+    }
+    
+    function loadXMLDoc() {
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
+           if (xmlhttp.status == 200) {
+               document.getElementById("myDiv").innerHTML = xmlhttp.responseText;
+           }
+           else if (xmlhttp.status == 400) {
+              alert('There was an error 400');
+           }
+           else {
+               alert('something else other than 200 was returned');
+           }
+        }
+    };
+
+    xmlhttp.open("GET", "ajax_info.txt", true);
+    xmlhttp.send();
+}
+
+    function add() {
+      var a = document.getElementById('material').value;
+      var b = document.getElementById('quantity').value;
+      var c = document.getElementById('unit_price').value;
+      if (a != '' && b != '' && c != '') {
+        var tr_node = document.createElement("tr")
+
+        var material_node = document.createElement('td')
+        material_node.innerHTML = a
+        var quantity_node = document.createElement('td')
+        quantity_node.innerHTML = b
+        var unit_price_node = document.createElement('td')
+        unit_price_node.innerHTML = c
+        var total_node = document.createElement('td')
+        total_node.innerHTML = parseFloat(b) * parseFloat(c)
+
+        tr_node.appendChild(material_node)
+        tr_node.appendChild(quantity_node)
+        tr_node.appendChild(unit_price_node)
+        tr_node.appendChild(total_node)
+
+        poMaterials.push({ 
+          material: a, 
+          quantity: b, 
+          unit_price: c, 
+          total_price: parseFloat(b) * parseFloat(c)
+        });
+
+        document.getElementById('templateMaterials').appendChild(tr_node)
+      }
+      console.log(a)
+      console.log(b)
+      console.log(c)
+
+    }
+  </script>

@@ -19,7 +19,7 @@ module.exports = (sequelize, type) => {
       allowNull: false,
     },
     materials: {
-      type: Sequelize.JSON,
+      type: Sequelize.STRING,
       allowNull: false,
     },
     supplier: {

@@ -50,7 +50,7 @@ Project.belongsTo(User, { onDelete: 'CASCADE', foreignKey: 'engineerInCharge', a
 Project.belongsTo(User, { onDelete: 'CASCADE', foreignKey: 'engineerHead', as:'EHEAD' });
 Project.hasMany(House, { onDelete: 'CASCADE' });
 Template.hasMany(House, { onDelete: 'CASCADE' })
-TemplateMaterial.hasMany(Template, {onDelete:'CASCADE'});
+Template.hasMany(TemplateMaterial, { onDelete: 'CASCADE' })
 Material.hasMany(TemplateMaterial, {onDelete: 'CASCADE'});
 Material.hasMany(Inventory, {onDelete: 'CASCADE'});
 Inventory.hasMany(PhaseMaterial, {onDelete: 'CASCADE'});
@@ -80,7 +80,7 @@ sequelize.sync({alter: true, force: true}).then(()=>{
     PurchaseOrder.findCreateFind({where:{
         description:"Need more cement to complete this project",
         comments:"",
-        materials:1,
+        materials:'[{"material":"Sand","quantity":"10","unit_price":"100","total_price":1000},{"material":"Sand","quantity":"10","unit_price":"100","total_price":1000},{"material":"Sand","quantity":"10","unit_price":"100","total_price":1000}]',
         orderedBy: 'B Matriano',
         dateOrdered:'12/12/1999'
     }});
@@ -127,16 +127,19 @@ sequelize.sync({alter: true, force: true}).then(()=>{
             quantity: 100,
             category: 0,
             materialId: 1,
+            templateId: 1
         }});
         TemplateMaterial.findCreateFind({where:{
             quantity: 100,
             category: 0,
             materialId: 2,
+            templateId: 1
         }});
         TemplateMaterial.findCreateFind({where:{
             quantity: 100,
             category: 0,
             materialId: 3,
+            templateId: 1
         }})
     })
 })

@@ -133,28 +133,20 @@ let poColumns = [{
     "editable": true
 }];
 let poviewColumns = [{
-    "name": "category",
-    "value": "Category",
-    "editable": false
-}, {
-    "name": "description",
-    "value": "Description",
+    "name": "material",
+    "value": "Material",
     "editable": false
 }, {
     "name": "quantity",
     "value": "Quantity",
     "editable": false
 }, {
-    "name": "unit",
+    "name": "unit_price",
     "value": "Unit",
     "editable": false
 }, {
-    "name": "unitCost",
-    "value": "Unit Cost",
-    "editable": false
-}, {
-    "name": "amount",
-    "value": "Amount",
+    "name": "total_price",
+    "value": "Total Price",
     "editable": false
 }];
 let posummaryColumns = [{

@@ -66,13 +66,12 @@
         {{/if}}
 
         {{#if ../../active.viewAPO}}
-        <a href="../management/viewapo/{{lookup row 'id'}}">View</option></a>
-        <a href="../management/pendingpo/{{lookup row 'id'}}">Pending PO</option></a>
-        <a value="edit" data-toggle="modal" data-target="#exampleModalCenter">Edit</option></a>
-        <a>
-          <option value="delete" onclick="changeSelect('management/deleteviewAPO', this.value, {{lookup row 'id'}})">
-            Delete</option>
-        </a>
+        <a href="../management/po/{{lookup row 'id'}}">View</option></a>
+        <a href="../management/po/{{lookup row 'id'}}/pending">Pending PO</option></a>
+        <a href="../management/po/approve/{{lookup row 'id'}}" >Approve</option></a>
+        <a href="../management/po/deny/{{lookup row 'id'}}" >Deny</option></a>
+        <a href="../management/po/delete/{{lookup row 'id'}}" >Delete</option></a>
+
 
         {{/if}}
 
@@ -90,11 +89,7 @@
 
         {{#if ../../active.viewprojects}}
         <a value="edit" data-toggle="modal" data-target="#editProject">Edit</option></a>
-        <a value="delete">Delete</option></a>
-        <a>
-          <option value="delete"
-            onclick="changeSelect('management/deleteviewProjects', this.value, {{lookup row 'id'}})"> Delete</option>
-        </a>
+        <a href="/management/house/delete/{{lookup row 'id'}}" value="delete">Delete</option></a>
 
         <div class="modal fade" id="editProject" tabindex="-1" role="dialog" aria-labelledby="MyModal"
           aria-hidden="true">

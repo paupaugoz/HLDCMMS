@@ -273,7 +273,7 @@ router.get('/po', (req, res) => {
         let approved = 0;
         let pending = 0;
         for (let data in poData) {
-            if (data.status == "pending") {
+            if (data.status == "Pending") {
                 pending++;
             }
             else {
@@ -303,31 +303,26 @@ router.get('/po', (req, res) => {
 
 // Direct to view page based on item id if routerroved
 router.get('/po/:id', (req, res) => {
-    console.log(req.params.id);
-    var itemId = req.params.id;
-    var item = poData.find((a) => {
-        return a.id == itemId
-    });
-    console.log(item);
-    res.render('management/viewapo', {
-        active: {
-            management: true,
-            viewAPO: true,
-            highlight: true
-        },
-        item: poData.find((a) => {
-            return a.id == itemId
-        }),
-        data: poviewData,
-        columns: poviewColumns,
-        pageHeader: "Purchase Orders",
-        helpers: {
-            json: function (a) {
-                var stringified = JSON.stringify(a);
-                return stringified.replace(/&quot;/g, '\\"');
+    models.PurchaseOrder.findByPk(req.params.id).then((poData)=>{
+        console.log(JSON.parse(poData.materials))
+        res.render('management/viewapo', {
+            active: {
+                management: true,
+                viewAPO: true,
+                highlight: true
+            },
+            item: poData,
+            data: JSON.parse(poData.materials),
+            columns: poviewColumns,
+            pageHeader: "Purchase Orders",
+            helpers: {
+                json: function (a) {
+                    var stringified = JSON.stringify(a);
+                    return stringified.replace(/&quot;/g, '\\"');
+                }
             }
-        }
-    });
+        });
+    })
 });
 
 
@@ -393,22 +388,26 @@ router.get('/templates', (req, res) => {
 
 router.get('/templates/new', (req, res) => {
     models.Template.findAll().then((templatesData) => {
-        res.render('management/createtemplate', {
-            active: {
-                management: true,
-                templates: true,
-                createtemplate: true
-            },
-            data: templatesData,
-            columns: createtemplatesColumns,
-            pageHeader: "Templates",
-            helpers: {
-                json: function (a) {
-                    var stringified = JSON.stringify(a);
-                    return stringified.replace(/&quot;/g, '\\"');
+        models.Material.findAll({raw:true}).then((materialsData)=>{
+            res.render('management/createtemplate2', {
+                active: {
+                    management: true,
+                    templates: true,
+                    createtemplate: true
+                },
+                data: templatesData,
+                columns: createtemplatesColumns,
+                materials:materialsData,
+                materials_string:JSON.stringify(materialsData).replace(/&quot;/g, '\\"'),
+                pageHeader: "Templates",
+                helpers: {
+                    json: function (a) {
+                        var stringified = JSON.stringify(a);
+                        return stringified.replace(/&quot;/g, '\\"');
+                    }
                 }
-            }
-        });
+            });
+        })
     })
 });
 
@@ -441,11 +440,34 @@ router.get('/materials/new', (req, res) => {
     });
 });
 
+router.get('/po/approve/:id', (req, res) => {
+    models.PurchaseOrder.update({status: 'Approved'},{where:{id:req.params.id}}).then(()=>{
+        res.redirect('/management/po');
+    });
+});
+
+router.get('/po/deny/:id', (req, res) => {
+    models.PurchaseOrder.update({status: 'Denied'},{where:{id:req.params.id}}).then(()=>{
+        res.redirect('/management/po');
+    });
+});
+
+router.get('/po/delete/:id', (req, res) => {
+    models.PurchaseOrder.destroy({where:{id:req.params.id}}).then(()=>{
+        res.redirect('/management/po');
+    });
+});
+
 router.post('/postMaterialForm', function (req, res) {
     models.Material.create(req.body).then(() => {
         res.redirect('/management/materials');
     })
 });
+
+router.get('/house/delete/:id', (req,res)=>{
+    models.House.destroy({where:{id:req.params.id}});
+    res.redirect('/management/projects')
+})
 
 // Create project form
 router.post('/projects/new', function (req, res) {
@@ -539,6 +561,26 @@ router.post('/deleteviewProjects', function (req, res) {
 });
 
 router.post('/deletecreateBom', function (req, res) {
+    console.log(req.body);
+});
+
+router.post('/templates/new', function (req, res) {
+    models.Template.create({templateName:req.body.templateName,description:req.body.templateDescription}).then((template)=>{
+        let template_id = template.dataValues.id;
+        for(let material of req.body.materials){
+            let material_name = material.material
+            models.Material.findAll({where:{materialName:material_name},raw:true}).then((_material)=>{
+                console.log(_material)
+                models.TemplateMaterial.create({
+                    quantity: material.quantity,
+                    category: material.category,
+                    templateId: template_id,
+                    materialId: _material[0].id,
+                })
+            })
+        }
+        console.log(template)
+    })
     console.log(req.body);
 });
 

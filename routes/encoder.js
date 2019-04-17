@@ -26,7 +26,6 @@ router.get('/dashboard', (req, res) => {
 router.get('/po', (req, res) => {
     models.PurchaseOrder.findAll().then((poData) => {
         models.Material.findAll().then((material)=>{
-            console.log(material)
             res.render('encoder/epo', {
                 active: {
                     encoder: true,
@@ -46,6 +45,29 @@ router.get('/po', (req, res) => {
         })
     })
 });
+
+router.get('/po/new',(req,res)=>{
+    models.Material.findAll().then((material)=>{
+        res.render('encoder/ecreatepo2',{
+            active: {
+                encoder: true,
+                epo: true
+            },
+            pageHeader: "Create a New Purchase Order",
+            materials:material
+        })
+    })
+})
+
+router.post('/po/new',(req,res)=>{
+    console.log(req)
+    let user_id = req.user.dataValues.fullName
+    req.body.orderedBy = user_id;
+    req.body.materials = JSON.stringify(req.body.materials) 
+    models.PurchaseOrder.create(req.body).then((po)=>{
+        console.log(po)
+    })
+})
 
 router.get('/materials', (req, res) => {
     res.render('encoder/ematerials', {
@@ -115,12 +137,10 @@ router.get('/requisition/new', (req, res) => {
 });
 
 router.get('/requisition/new/2', (req, res) => {
-    console.log(req.params.id);
     var itemId = req.params.id;
     var item = poData.find((a) => {
         return a.id == itemId
     });
-    console.log(item);
     res.render('encoder/ecreatereq2', {
         active: {
             encoder: true,
