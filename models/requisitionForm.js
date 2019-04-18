@@ -8,7 +8,8 @@ module.exports = (sequelize, type) => {
     },
     status: {
       type: Sequelize.STRING,
-      default: "Pending"
+      default: "pending",
+      allowNull: false
     },
     description: {
       type: Sequelize.STRING,
@@ -19,7 +20,7 @@ module.exports = (sequelize, type) => {
       allowNull: true,
     },
     materials: {
-      type: Sequelize.STRING,
+      type: Sequelize.TEXT('LONG'),
       allowNull: false,
     },
     supplier: {

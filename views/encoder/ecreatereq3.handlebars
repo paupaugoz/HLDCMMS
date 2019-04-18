@@ -74,7 +74,8 @@
           supplier: document.getElementById('supplier').value,
           dateOrdered: document.getElementById('dateOrdered').value,
           projectId: document.getElementById('project').value,
-          materials: poMaterials
+          materials: poMaterials,
+          status: "pending"
         }));
       window.location.replace('/encoder/po')
     }

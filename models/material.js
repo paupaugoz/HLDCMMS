@@ -9,7 +9,7 @@ module.exports = (sequelize, type) => {
       allowNull: false,
     },
     priceHistory: {
-      type: Sequelize.STRING,
+      type: Sequelize.TEXT('LONG'),
       allowNull: true,
     },
   });

@@ -24,23 +24,24 @@
 </div>
 
 
-<div class="row proj margin-top">
+{{!-- <div class="row proj margin-top">
   <h3>2. Select type of report</h3>
 </div>
 
 <div class="row proj margin-top">
-  <input type="radio" name="historyType"> Price History</input>
+  <input type="radio" name="historyType" value="price"> Price History</input>
 </div>
 <div class="row proj">
-  <input type="radio" name="historyType"> Materials History</input>
-</div>
+  <input type="radio" name="historyType" value="price"> Materials History</input>
+</div> --}}
 
 
 
 
   <div class="projectfooter">
    <a href="#"><button type="button" class="reports btn btn-transparent" >Back</button></a>
-   <a href="/management/purchase_report/new"><button type="button" class="reports btn btn-save" >Generate Report</button></a>
+   <a href="/management/purchase_report/new"></a>
+   <button type="button" class="reports btn btn-save" onclick="generateReport()" >Generate Report</button></a>
 </div>
 
 </div>
@@ -60,6 +61,18 @@
 });
 </script>
 
+<script>
+  function generateReport(){
+    var params = {
+      projectId: document.getElementById('project').value,
+    }
+    var esc = encodeURIComponent;
+    var query = Object.keys(params)
+      .map(k => esc(k) + '=' + esc(params[k]))
+      .join('&');
+    window.location.replace('/management/purchase_report/new?'+query);
+  }
+</script>
 
 <script>
   var min = 1990,

@@ -223,6 +223,14 @@ sequelize.sync({alter: true, force: true}).then(()=>{
         description:"",
         materials:'[{"material":"Sand","quantity":"100"},{"material":"Sand","quantity":"100"},{"material":"Sand","quantity":"100"},{"material":"Sand","quantity":"100"},{"material":"Sand","quantity":"100"}]',
         projectId:1
+    }});
+
+    RequisitionForm.findCreateFind({where:{
+        dateOrdered:"12/12/1999",
+        status:"approved",
+        description:"",
+        materials: '[{"material":"Sand","quantity":"100","average_price":50},{"material":"Sand","quantity":"100","average_price":50},{"material":"Sand","quantity":"100","average_price":50},{"material":"Sand","quantity":"100","average_price":50},{"material":"Sand","quantity":"100","average_price":50}]',
+        projectId:1
     }})
 })
 
