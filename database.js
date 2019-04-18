@@ -77,6 +77,41 @@ sequelize.sync({alter: true, force: true}).then(()=>{
         userType: 2,
         fullName: 'A Matriano' 
     }});
+    User.findCreateFind({where:{
+        username: 'gwei',
+        password: encryptPassword('garywei37'),
+        email: 'garywei37@gmail.com',
+        userType: 0,
+        fullName: 'Gary Wei' 
+    }});
+    User.findCreateFind({where:{
+        username: 'vwei',
+        password: encryptPassword('viviwei94'),
+        email: 'viviwei@gmail.com',
+        userType: 0,
+        fullName: 'Vivian Wei' 
+    }});
+    User.findCreateFind({where:{
+        username: 'rtabil',
+        password: encryptPassword('roland.hdlc'),
+        email: 'roland.hdlc@yahoo.com',
+        userType: 3,
+        fullName: 'Roland Tabil' 
+    }});
+    User.findCreateFind({where:{
+        username: 'tvillanueva',
+        password: encryptPassword('dragon_may64'),
+        email: 'dragon_may64@yahoo.com',
+        userType: 1,
+        fullName: 'Tess Villanueva' 
+    }});
+    User.findCreateFind({where:{
+        username: 'laclan',
+        password: encryptPassword('lisciehdlc'),
+        email: 'lisciehdlc@yahoo.com',
+        userType: 2,
+        fullName: 'Liscie Aclan' 
+    }});
     PurchaseOrder.findCreateFind({where:{
         description:"Need more cement to complete this project",
         comments:"",
@@ -121,13 +156,43 @@ sequelize.sync({alter: true, force: true}).then(()=>{
 
     Material.findCreateFind({where:{
         materialName:'Sand'
-    }});
+    }}).then(()=>{
+        Inventory.findCreateFind({
+            where:{
+                quantityBought: 500,
+                quantityUsed: 10,
+                price: 50,
+                materialId: 1
+            }
+        });
+    });
+    
     Material.findCreateFind({where:{
         materialName:'Steel'
-    }});
+    }}).then(()=>{
+        Inventory.findCreateFind({
+            where:{
+                quantityBought: 500,
+                quantityUsed: 500,
+                price: 50,
+                materialId: 2
+            }
+        });
+    });
+
     Material.findCreateFind({where:{
         materialName:'Gravel'
-    }});
+    }}).then(()=>{
+        Inventory.findCreateFind({
+            where:{
+                quantityBought: 500,
+                quantityUsed: 500,
+                price: 50,
+                materialId: 3
+            }
+        });
+    });
+    
     Template.findCreateFind({where:{
         templateName:'Basic house',
         description:'Basic house used for testing. Do not use in production.'
@@ -156,7 +221,7 @@ sequelize.sync({alter: true, force: true}).then(()=>{
         dateOrdered:"12/12/1999",
         status:"pending",
         description:"",
-        materials:"",
+        materials:'[{"material":"Sand","quantity":"100"},{"material":"Sand","quantity":"100"},{"material":"Sand","quantity":"100"},{"material":"Sand","quantity":"100"},{"material":"Sand","quantity":"100"}]',
         projectId:1
     }})
 })

@@ -3,8 +3,10 @@
   <form action="/warehouse/postEditRequisition" method="POST" id="newpostatus-form">
     <div class="row">
       <h1 class="viewheader">{{pageHeader}} {{item.id}}</h1>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Edit
-        Requisition Form</button>
+      <a class="btn btn-primary" href="/warehouse/requisition/approve/{{item.id}}">Approve
+        Requisition Form</a>
+      <a class="btn btn-primary" href="/warehouse/requisition/deny/{{item.id}}">Deny
+        Requisition Form</a>
       <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="MyModal"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -49,14 +51,8 @@
   <div class="row">
 
     <!-- get from db-->
-    <p class="viewproject"><strong>Delivery Location</strong>: Fujjan Corporation</p>
-    <p class="viewproject2"><strong>Requisition Date</strong>: 02/24/2019</p>
-  </div>
-  <div class="row">
-    <p class="viewproject"><strong>Unit</strong>: 2-Story Commercial Bldg</p>
-  </div>
-  <div class="row">
-    <p class="viewproject"><strong>Phase</strong>: First Quarter</p>
+
+    <p class="viewproject2"><strong>Requisition Date</strong>{{dateCreated}}</p>
   </div>
 
   <div class="fixed">

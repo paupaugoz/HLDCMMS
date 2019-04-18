@@ -286,10 +286,6 @@ let bomColumns = [{
     "editable": false
 }]
 let viewrequisitionColumns = [{
-    "name": "category",
-    "value": "Category",
-    "editable": false
-}, {
     "name": "description",
     "value": "Description",
     "editable": false
