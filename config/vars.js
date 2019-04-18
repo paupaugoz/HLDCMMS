@@ -337,6 +337,10 @@ let createtemplatesColumns = [{
 	"name": "unit",
 	"value": "Unit",
 	"editable": false
+},{
+    "name": "Action",
+    "value": "Action",
+    "editable": true
 }];
 
 let editrequisitionColumns = [{

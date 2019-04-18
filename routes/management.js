@@ -494,7 +494,6 @@ router.get('/templates/new', (req, res) => {
                 columns: createtemplatesColumns,
                 materials:materialsData,
                 materials_string:JSON.stringify(materialsData).replace(/&quot;/g, '\\"'),
-                pageHeader: "Templates",
                 helpers: {
                     json: function (a) {
                         var stringified = JSON.stringify(a);
