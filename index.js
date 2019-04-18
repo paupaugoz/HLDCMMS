@@ -65,6 +65,14 @@ app.get('/', (req, res) => {
   });
 });
 
+
+app.get('/f', (req, res) => {
+  res.render('index2', {
+    layout: false
+  });
+});
+
+
 app.listen(3000, () => {
   console.log('app is running → PORT 3000');
 });

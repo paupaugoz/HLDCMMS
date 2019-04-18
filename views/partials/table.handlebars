@@ -28,6 +28,14 @@
 
   {{/if}}
 
+    {{#if ../../active.createtemplate}}
+           <a>
+          <option value="delete" onclick="changeSelect('management/deleteCTemplate', this.value, {{lookup row 'id'}})">
+            Delete</option>
+        </a>
+
+  {{/if}}
+
         {{#if ../../active.employees}}
         <a value="edit" data-toggle="modal" data-target="#employeeModal">Edit</option></a>
         <a>
@@ -84,7 +92,7 @@
 
         {{#if ../../active.projects}}
         <a href="/management/viewprojects/{{lookup row 'id'}}">View</option></a>
-        <a href="/management/createbom/{{lookup row 'id'}}">Create BOM</option></a>
+        <a href="/management/createbom/{{lookup row 'id'}}">View BOM</option></a>
         <a>
           <option value="delete" onclick="changeSelect('management/deleteProjects', this.value, {{lookup row 'id'}})">
             Delete</option>

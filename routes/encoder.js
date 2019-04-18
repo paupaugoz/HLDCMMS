@@ -207,7 +207,7 @@ router.post('/posteMaterialForm', function (req, res) {
     })
 });
 
-router.post('/deleteTest', function (req, res) {
+router.post('/deleteEpo', function (req, res) {
     console.log(req.body);
 });
 
