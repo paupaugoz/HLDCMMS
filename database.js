@@ -150,7 +150,15 @@ sequelize.sync({alter: true, force: true}).then(()=>{
             materialId: 3,
             templateId: 1
         }})
-    })
+    });
+
+    RequisitionForm.findCreateFind({where:{
+        dateOrdered:"12/12/1999",
+        status:"pending",
+        description:"",
+        materials:"",
+        projectId:1
+    }})
 })
 
 function encryptPassword(plaintext) {

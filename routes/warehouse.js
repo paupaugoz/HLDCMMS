@@ -114,6 +114,7 @@ router.get('/po/:id/pending', (req, res) => {
 
 router.get('/requisition', (req, res) => {
     models.RequisitionForm.findAll().then((requisitionData) => {
+        console.log(requisitionData)
         res.render('warehouse/wrequisition', {
             active: {
                 warehouse: true,

@@ -243,20 +243,20 @@ let requisitionColumns = [{
     "value": "Date Created",
     "editable": false
 }, {
-    "name": "requisitionDate",
+    "name": "status",
+    "value": "Date Created",
+    "editable": false
+},{
+    "name": "dateOrdered",
     "value": "Requisition Date",
+    "editable": false
+},{
+    "name": "projectId",
+    "value": "Project ID",
     "editable": false
 }, {
     "name": "quantity",
     "value": "Quantity",
-    "editable": false
-}, {
-    "name": "unit",
-    "value": "Unit",
-    "editable": false
-}, {
-    "name": "projectUnit",
-    "value": "Project Unit",
     "editable": false
 }, {
     "name": "action",
