@@ -19,6 +19,15 @@
 
         {{#if col.editable}}
 
+
+  {{#if ../../active.epo}}
+          <a>
+          <option value="delete" onclick="changeSelect('encoder/deleteEpo', this.value, {{lookup row 'ID'}})">
+            Delete</option>
+         </a>
+
+  {{/if}}
+
         {{#if ../../active.employees}}
         <a value="edit" data-toggle="modal" data-target="#employeeModal">Edit</option></a>
         <a>
@@ -42,8 +51,6 @@
                     <input type="text" id="first-name" name="first-name" required>
                     <label for="last-name" class="col-form-label">Last Name</label>
                     <input type="text" id="last-name" name="last-name" required>
-                    <label for="user-name" class="col-form-label">User Name</label>
-                    <input type="text" id="user-name" name="user-name" required>
                     <label for="password" class="col-form-label">Password</label>
                     <input type="text" id="password" name="password" required>
                     <label for="position" class="col-form-label">Position</label>
@@ -89,7 +96,11 @@
 
         {{#if ../../active.viewprojects}}
         <a value="edit" data-toggle="modal" data-target="#editProject">Edit</option></a>
-        <a href="/management/house/delete/{{lookup row 'id'}}" value="delete">Delete</option></a>
+        <!--<a href="/management/house/delete/{{lookup row 'id'}}" value="delete">Delete</option></a>
+        --> <a>
+          <option value="delete" onclick="changeSelect('management/deleteviewProjects', this.value, {{lookup row 'id'}})">
+            Delete</option>
+        </a>
 
         <div class="modal fade" id="editProject" tabindex="-1" role="dialog" aria-labelledby="MyModal"
           aria-hidden="true">
@@ -134,8 +145,8 @@
         </a>
 
         {{/if}}
-        {{#if ../../active.template}}
-        <a href="/management/createtemplate/{{lookup row 'id'}}">View</option></a>
+        {{#if ../../active.templates}}
+        <a href="/management/viewtemplates/{{lookup row 'id'}}">View</option></a>
         <a value="edit" data-toggle="modal" data-target="#editTemplate">Edit</option></a>
         <a>
           <option value="delete"
@@ -281,8 +292,8 @@
           {{/if}}
 
           {{#if ../../active.wpo}}
-          <a href="/warehouse/wviewpo/{{lookup row 'id'}}">View</option>
-            <a href="/warehouse/wpendingpo/{{lookup row 'id'}}">View Pending</option>
+          <a href="/warehouse/po/{{lookup row 'id'}}">View</option>
+            <a href="/warehouse/po/pending/{{lookup row 'id'}}">View Pending</option>
               {{/if}}
 
               {{#if ../../active.wrequisition}}
@@ -295,18 +306,22 @@
                 {{/if}}
 
                 {{#if ../../active.engpo}}
-                <a href="/engineer/engviewpo/{{lookup row 'id'}}">Edit PO</option>
+                <a href="/engineer/po/{{lookup row 'id'}}">Edit PO</option></a>
                   <a>
                     <option value="delete" onclick="changeSelect('engineer/deletePo', this.value, {{lookup row 'id'}})">
                       Delete</option>
                   </a>
+                <a href="/engineer/bom/new/{{lookup row 'id'}}">Create BOM</option></a>
+              
                   {{/if}}
 
                   {{#if ../../active.engprojects}}
-                  <a href="/engineer/engviewprojects/{{lookup row 'id'}}">View</option>
-                    <a href="/engineer/engcreatebom/{{lookup row 'id'}}">Create BOM</option>
+                  <a href="/engineer/projects/{{lookup row 'id'}}">View</option></a>
+                    <a href="/engineer/bom/new/{{lookup row 'id'}}">Create BOM</option></a>
                       {{/if}}
 
+
+                 
                       {{else}}
                       {{lookup row col.name}}
                       {{/if}}

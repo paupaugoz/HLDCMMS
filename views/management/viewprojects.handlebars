@@ -19,7 +19,7 @@
    
 
     </div>
-
+ 
 
   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="MyModal" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -29,8 +29,11 @@
         <h5 class="modal-title" id="exampleModalLongTitle">New Unit</h5>
       </div>
       <div class="modal-body">
-     <form action="/management/postViewProjectsForm"  method="POST" id="viewprojects-form">
+ 
+     <form action="/management/postViewProjectsForm" method="POST" id="viewprojects-form">
         <div class="settings">
+          <label for="description" class="col-form-label">Description</label>
+          <input type="text" id="first-name" name="description" required>
           <label for="template" class="col-form-label">CHOOSE A TEMPLATE</label>
           <select class="unit" id="templateId" name="templateId" required>
           <option disabled selected value></option>
@@ -58,3 +61,13 @@
 <div class="fixed">
  {{> table tableColumns=columns tableData=data}}
 </div>
+
+
+<script>
+ $('#postViewProjectsForm').submit(function(e) {
+    e.preventDefault();
+    // Coding
+    $('#ExampleModalCenter').modal('hide');
+    return false;
+});
+</script>

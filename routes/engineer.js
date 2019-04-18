@@ -18,7 +18,8 @@ const Sequelize = require('sequelize');
 router.get('/dashboard', (req, res) => {
     res.render('engineer/engdashboard', {
         active: {
-            engineer: true
+            engineer: true,
+            dashboard: true
         },
         pageHeader: "Welcome!"
     });
@@ -181,7 +182,7 @@ router.get('/projects/:id', (req, res) => {
     ]}).then((viewprojectsData)=>{
         res.render('engineer/engviewprojects', {
             active: {
-                warehouse: true,
+                engineer: true,
                 engprojects: true
             },
             item: viewprojectsData[0],

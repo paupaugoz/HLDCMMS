@@ -17,7 +17,8 @@ const exphbs = require('express-handlebars');
 router.get('/dashboard', (req, res) => {
     res.render('warehouse/wdashboard', {
         active: {
-            warehouse: true
+            warehouse: true,
+            dashboard: true
         },
         pageHeader: "Welcome!",
         helpers: {
@@ -91,7 +92,7 @@ router.get('/po/:id', (req, res) => {
     });
 });
 
-router.get('/po/:id/pending', (req, res) => {
+router.get('/po/pending/:id', (req, res) => {
     models.PurchaseOrder.findByPk(req.params.id).then((poData) => {
         res.render('warehouse/wpendingpo', {
             active: {

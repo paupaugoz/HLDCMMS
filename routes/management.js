@@ -428,6 +428,38 @@ router.get('/viewapo/:id', (req, res) => {
 });
 */
 
+router.get('/viewtemplates/:id', (req, res) => {
+    console.log(req.params.id);
+    var itemId = req.params.id;
+    var item = templatesData.find((a) => {
+        return a.id == itemId
+    });
+    console.log(item);
+    models.TemplateMaterial.findAll({where:{templateId:req.params.id}}).then((template)=>{
+        let templatesData = JSON.parse(template.materials)
+        res.render('management/createtemplate2', {
+            active: {
+                management: true,
+                template: true
+            },
+            item: templatesData.find((a) => {
+                return a.id == itemId
+            }),
+            data: templatesData,
+            columns: templatesColumns,
+            pageHeader: "Templates",
+            helpers: {
+                json: function (a) {
+                    var stringified = JSON.stringify(a);
+                    return stringified.replace(/&quot;/g, '\\"');
+                }
+            }
+        });
+    })
+
+});
+
+
 
 router.get('/templates', (req, res) => {
     models.Template.findAll().then((templatesData) => {
@@ -588,9 +620,7 @@ router.post('/postCreateTemplateForm', function (req, res) {
 router.post('/postViewProjectsForm', function (req, res) {
     models.Template.findByPk(req.body.templateId).then((template)=>{
         req.body.template=template.templateName
-        models.House.create(req.body).then(()=>{
-            res.redirect('/management/projects');
-        })
+        models.House.create(req.body)
     })
 });
 
