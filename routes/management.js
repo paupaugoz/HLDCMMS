@@ -620,6 +620,7 @@ router.post('/postViewProjectsForm', function (req, res) {
     models.Template.findByPk(req.body.templateId).then((template)=>{
         req.body.template=template.templateName
         models.House.create(req.body)
+
     })
 });
 
