@@ -183,7 +183,7 @@ router.get('/projects/:id', (req, res) => {
         res.render('engineer/engviewprojects', {
             active: {
                 engineer: true,
-                engprojects: true
+                engviewprojects: true
             },
             item: viewprojectsData[0],
             data: viewprojectsData[0],
@@ -202,5 +202,9 @@ router.get('/projects/:id', (req, res) => {
 router.post('/deletePo', function(req, res) {
     console.log(req.body);
   });
+
+router.post('/deleteEngProjects', function(req, res) {
+    console.log(req.body);
+});
 
 module.exports = router;

@@ -128,8 +128,6 @@
                       <option disabled selected value></option>
                       <option>Test</option>
                     </select>
-                    <label for="status" class="col-form-label">Status</label>
-                    <input type="text" id="status" name="status" required>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-transparent" data-dismiss="modal">Cancel</button>
@@ -309,6 +307,13 @@
                 </a>
                 {{/if}}
 
+                 {{#if ../../active.engviewprojects}}
+                   <a>
+                    <option value="delete" onclick="changeSelect('engineer/deleteEngProjects', this.value, {{lookup row 'id'}})">
+                      Delete</option>
+                  </a>
+                      {{/if}}
+
                 {{#if ../../active.engpo}}
                 <a href="/engineer/po/{{lookup row 'id'}}">Edit PO</option></a>
                   <a>
@@ -324,6 +329,7 @@
                     <a href="/engineer/bom/new/{{lookup row 'id'}}">Create BOM</option></a>
                       {{/if}}
 
+           
 
                  
                       {{else}}

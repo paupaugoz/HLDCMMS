@@ -49,10 +49,11 @@
         </div>    
      <div class="modal-footer">
         <button type="button" class="btn btn-transparent" data-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-save">Save</button>
-           </form>
+        <button type="submit" class="btn btn-save" >Save</button>
+          
     </div>
      </div>
+      </form>
    </div>
  </div>
   </div>
@@ -62,12 +63,19 @@
  {{> table tableColumns=columns tableData=data}}
 </div>
 
+<script>
+  $(document).ready(function(){ 
+  $(form).on('submit', function(){ 
+        location.reload();
+  });
+})
+</script>
 
 <script>
  $('#postViewProjectsForm').submit(function(e) {
     e.preventDefault();
     // Coding
-    $('#ExampleModalCenter').modal('hide');
+    $('#exampleModalCenter').modal('hide');
     return false;
 });
 </script>
