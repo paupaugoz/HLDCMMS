@@ -311,6 +311,13 @@
                 </a>
                 {{/if}}
 
+                 {{#if ../../active.engviewprojects}}
+                   <a>
+                    <option value="delete" onclick="changeSelect('engineer/deleteEngProjects', this.value, {{lookup row 'id'}})">
+                      Delete</option>
+                  </a>
+                      {{/if}}
+
                 {{#if ../../active.engpo}}
                 <a href="/engineer/po/{{lookup row 'id'}}">Edit PO</option></a>
                   <a>
@@ -326,6 +333,7 @@
                     <a href="/engineer/bom/new/{{lookup row 'id'}}">Create BOM</option></a>
                       {{/if}}
 
+           
 
                  
                       {{else}}
