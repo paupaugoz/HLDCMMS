@@ -313,7 +313,7 @@ let purchaseReportColumn = [{
     "editable": false
 }, {
     "name": "total_price",
-    "value": "Total Quantity",
+    "value": "Total Cost",
     "editable": false
 }]
 

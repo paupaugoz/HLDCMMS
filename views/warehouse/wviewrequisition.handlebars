@@ -2,7 +2,13 @@
 <div class="row">
   <form action="/warehouse/postEditRequisition" method="POST" id="newpostatus-form">
     <div class="row">
-      <h1 class="viewheader">{{pageHeader}} {{item.id}}</h1>
+      <h1 class="viewheader">{{pageHeader}} {{item.id}} 
+          {{#if unfulfillable}}
+            <span class="badge badge-pill badge-danger">unfulfillable</span>
+          {{/if}}
+        </h1>
+      <br/>
+      <br/>
       <a class="btn btn-primary" href="/warehouse/requisition/approve/{{item.id}}">Approve
         Requisition Form</a>
       <a class="btn btn-primary" href="/warehouse/requisition/deny/{{item.id}}">Deny
@@ -12,8 +18,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content fix">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Edit Requisition Form</h5>
-
+                <h5 class="modal-title" id="exampleModalLongTitle">Edit Requisition Form</h5>
             </div>
             <div class="modal-body">
 

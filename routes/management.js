@@ -87,21 +87,48 @@ router.get('/purchase_orders', (req, res) => {
 });
 
 router.get('/purchase_report/new', (req, res) => {
-    res.render('/management/generatePurchaseReport', {
-        active: {
-            management: true,
-            reports: true
-        },
-        data: purchaseReportData,
-        columns: purchaseReportColumn,
-        pageHeader: "Reports",
-        helpers: {
-            json: function (a) {
-                var stringified = JSON.stringify(a);
-                return stringified.replace(/&quot;/g, '\\"');
+    models.RequisitionForm.findAll({where:{projectId:req.query.projectId, status:'approved'}}).then((reqforms)=>{
+        let materials = {}
+        for(let reqform of reqforms){
+            let req_materials = JSON.parse(reqform.materials);
+            for(let req_material of req_materials){
+                console.log(req_material)
+                if(req_material.material in materials){
+                    materials[req_material.material].unit_price = (materials[req_material.material].unit_price * materials[req_material.material].quantity + parseFloat(req_material.average_price)*parseFloat(req_material.quantity))/(parseFloat(req_material.quantity)+materials[req_material.material].quantity)
+                    materials[req_material.material].quantity += parseFloat(req_material.quantity)
+                }
+                else{
+                    materials[req_material.material] = {}
+                    materials[req_material.material].quantity = parseFloat(req_material.quantity)
+                    materials[req_material.material].unit_price = parseFloat(req_material.average_price)
+                }
             }
         }
-    });
+        console.log(materials)
+        let report_data = []
+        for(let key in materials){
+            let data = materials[key]
+            data.material = key
+            data.total_price = data.unit_price * data.quantity
+            report_data.push(data)
+        }
+        console.log(report_data)
+        res.render('management/generatePurchaseReport', {
+            active: {
+                management: true,
+                reports: true
+            },
+            data: report_data,
+            columns: purchaseReportColumn,
+            pageHeader: "Reports",
+            helpers: {
+                json: function (a) {
+                    var stringified = JSON.stringify(a);
+                    return stringified.replace(/&quot;/g, '\\"');
+                }
+            }
+        });
+    })
 });
 
 router.get('/project_report/new', (req, res) => {

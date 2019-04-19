@@ -11,8 +11,6 @@ const {
 const exphbs = require('express-handlebars');
 const Sequelize = require('sequelize');
 
-// Pending  /requisition, /requsisition/new, /requsisition/new2
-
 router.get('/dashboard', (req, res) => {
     res.render('encoder/edashboard', {
         active: {
@@ -212,6 +210,7 @@ router.post('/deleteEpo', function (req, res) {
 });
 
 router.post('/posteReq1', function (req, res) {
+    req.body.status = 'pending';
     models.RequisitionForm.create(req.body).then(() => {
         res.redirect('/encoder/requisition2');
     });
