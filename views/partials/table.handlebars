@@ -21,9 +21,7 @@
 
 
   {{#if ../../active.epo}}
-          <a>
-          <option value="delete" onclick="changeSelect('encoder/deleteEpo', this.value, {{lookup row 'ID'}})">
-            Delete</option>
+          <a href="/encoder/deleteEpo/{{lookup row 'id'}}"> Delete
          </a>
 
   {{/if}}
@@ -196,11 +194,9 @@
         {{/if}}
 
         {{#if ../../active.erequisition}}
-        <a href="/encoder/eviewrequisition/{{lookup row 'id'}}">View</option></a>
-        <a value="edit" data-toggle="modal" data-target="#editRequisition">Edit</option></a>
-        <a>
-          <option value="delete" onclick="changeSelect('encoder/deleteERequisition', this.value, {{lookup row 'id'}})">
-            Delete</option>
+        <a href="/encoder/requisition/{{lookup row 'id'}}">View</option></a>
+        <a href="/encoder/deleteERequisition/{{lookup row 'id'}}">
+          Delete
         </a>
 
         <div class="modal fade" id="editRequisition" tabindex="-1" role="dialog" aria-labelledby="MyModal"

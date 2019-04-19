@@ -115,6 +115,7 @@ sequelize.sync({alter: true, force: true}).then(()=>{
     PurchaseOrder.findCreateFind({where:{
         description:"Need more cement to complete this project",
         comments:"",
+        supplier:"Tata Steel",
         materials:'[{"material":"Sand","quantity":"10","unit_price":"100","total_price":1000},{"material":"Sand","quantity":"10","unit_price":"100","total_price":1000},{"material":"Sand","quantity":"10","unit_price":"100","total_price":1000}]',
         orderedBy: 'B Matriano',
         projectId: 1,
@@ -123,6 +124,7 @@ sequelize.sync({alter: true, force: true}).then(()=>{
     PurchaseOrder.findCreateFind({where:{
         description:"Need more sand to complete this project",
         comments:"",
+        supplier:"Tata Steel",
         materials:'[{"material":"Sand","quantity":"10","unit_price":"100","total_price":1000},{"material":"Sand","quantity":"10","unit_price":"100","total_price":1000},{"material":"Sand","quantity":"10","unit_price":"100","total_price":1000}]',
         orderedBy: 'B Matriano',
         projectId: 1,
@@ -220,7 +222,7 @@ sequelize.sync({alter: true, force: true}).then(()=>{
     RequisitionForm.findCreateFind({where:{
         dateOrdered:"12/12/1999",
         status:"pending",
-        description:"",
+        description:"Foundation work",
         materials:'[{"material":"Sand","quantity":"100"},{"material":"Sand","quantity":"100"},{"material":"Sand","quantity":"100"},{"material":"Sand","quantity":"100"},{"material":"Sand","quantity":"100"}]',
         projectId:1
     }});
@@ -228,7 +230,7 @@ sequelize.sync({alter: true, force: true}).then(()=>{
     RequisitionForm.findCreateFind({where:{
         dateOrdered:"12/12/1999",
         status:"approved",
-        description:"",
+        description:"Foundation work again",
         materials: '[{"material":"Sand","quantity":"100","average_price":50},{"material":"Sand","quantity":"100","average_price":50},{"material":"Sand","quantity":"100","average_price":50},{"material":"Sand","quantity":"100","average_price":50},{"material":"Sand","quantity":"100","average_price":50}]',
         projectId:1
     }})

@@ -340,24 +340,20 @@ let createtemplatesColumns = [{
 }];
 
 let editrequisitionColumns = [{
-    "name": "category",
-    "value": "Category",
-    "editable": false
-}, {
     "name": "description",
     "value": "Description",
     "editable": false
 }, {
-    "name": "quantity",
-    "value": "Quantity",
+    "name": "dateOrdered",
+    "value": "Date Ordered",
     "editable": false
 }, {
-    "name": "unit",
-    "value": "Unit",
+    "name": "projectId",
+    "value": "Project ID",
     "editable": false
 }, {
-    "name": "Action",
-    "value": "Action",
+    "name": "supplier",
+    "value": "Supplier",
     "editable": true
 }]
 
