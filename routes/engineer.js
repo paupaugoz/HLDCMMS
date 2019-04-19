@@ -199,6 +199,10 @@ router.get('/projects/:id', (req, res) => {
     })
 });
 
+router.post('/postNewStatus', function(req, res) {
+    console.log(req.body);
+  });
+
 router.post('/deletePo', function(req, res) {
     console.log(req.body);
   });

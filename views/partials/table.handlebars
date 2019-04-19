@@ -20,6 +20,17 @@
         {{#if col.editable}}
 
 
+    {{#if ../../active.engpo}}
+                <a href="/engineer/po/{{lookup row 'id'}}">Edit PO</a>
+                  <a>
+                    <option value="delete" onclick="changeSelect('engineer/deletePo', this.value, {{lookup row 'id'}})">
+                      Delete</option>
+                  </a>
+
+                <a href="/engineer/bom/new/{{lookup row 'id'}}">Create BOM</a>
+              
+                  {{/if}}
+
   {{#if ../../active.epo}}
           <a>
           <option value="delete" onclick="changeSelect('encoder/deleteEpo', this.value, {{lookup row 'ID'}})">
@@ -100,6 +111,13 @@
 
         {{/if}}
 
+    {{#if ../../active.engrequisition}}
+        <a>
+          <option value="delete" onclick="changeSelect('management/deleteProjects', this.value, {{lookup row 'id'}})">
+            Delete</option>
+        </a>
+
+        {{/if}}
 
 
         {{#if ../../active.viewprojects}}
@@ -303,7 +321,7 @@
               {{/if}}
 
               {{#if ../../active.wrequisition}}
-              <a href="/warehouse/requisition/{{lookup row 'id'}}">View</option>
+              <a href="/warehouse/requisition/{{lookup row 'id'}}">View</a>
                 <a>
                   <option value="delete"
                     onclick="changeSelect('warehouse/deletewRequisition', this.value, {{lookup row 'id'}})"> Delete
@@ -318,18 +336,10 @@
                   </a>
                       {{/if}}
 
-                {{#if ../../active.engpo}}
-                <a href="/engineer/po/{{lookup row 'id'}}">Edit PO</option></a>
-                  <a>
-                    <option value="delete" onclick="changeSelect('engineer/deletePo', this.value, {{lookup row 'id'}})">
-                      Delete</option>
-                  </a>
-                <a href="/engineer/bom/new/{{lookup row 'id'}}">Create BOM</option></a>
-              
-                  {{/if}}
+            
 
                   {{#if ../../active.engprojects}}
-                  <a href="/engineer/projects/{{lookup row 'id'}}">View</option></a>
+                  <a href="/engineer/projects/{{lookup row 'id'}}">View</a>
                     <a href="/engineer/bom/new/{{lookup row 'id'}}">Create BOM</option></a>
                       {{/if}}
 
