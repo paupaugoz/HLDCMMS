@@ -10,7 +10,7 @@ The Hidalgo Land Development Corporation Materials Management System is a web ap
 
 The web application is a Node.js application with Handlebars.js templating engine and Express.js with MySQL for the back-end.
 
-Clone/Download folder off of github repository:
+1. Clone/Download folder off of github repository:
 HLDC Materials Management System
 Download and install Node.js from:
 NodeJS
