@@ -6,6 +6,8 @@ Inventory Management
 Reports Generation
 Orders
 Requisition
+
+
 The web application is a Node.js application with Handlebars.js templating engine and Express.js with MySQL for the back-end.
 
 Clone/Download folder off of github repository:
